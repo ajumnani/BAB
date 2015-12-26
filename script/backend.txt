@@ -1,0 +1,49 @@
+-- Create table
+create table BUDDY
+(
+  first_name   VARCHAR2(45) not null,
+  email        VARCHAR2(45) not null,
+  pass         VARCHAR2(45) not null,
+  contact      VARCHAR2(20),
+  company_name VARCHAR2(45)
+) ;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table BUDDY
+  add primary key (EMAIL) ;
+
+
+
+-- Create table
+create table JOB_POSTS
+(
+  job_id           NUMBER not null,
+  job_poster_name  VARCHAR2(45) not null,
+  job_poster_email VARCHAR2(45) not null,
+  job_tittle       VARCHAR2(100),
+  job_description  VARCHAR2(900),
+  job_company      VARCHAR2(200),
+  job_location     VARCHAR2(200),
+  job_exp_level    VARCHAR2(45),
+  job_post_date    DATE default sysdate,
+  job_skills       VARCHAR2(900)
+) ;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table JOB_POSTS
+  add primary key (JOB_ID) ;
+
+
+
+
+-- Create table
+create table APPLIED_JOBS
+(
+  applier_buddy_email VARCHAR2(45) not null,
+  job_id              NUMBER not null,
+  job_poster_email    VARCHAR2(45) not null,
+  job_applied_date    DATE default SYSDATE,
+  job_applier_contact NUMBER,
+  job_applier_name    VARCHAR2(45)
+) ;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table APPLIED_JOBS
+  add primary key (APPLIER_BUDDY_EMAIL, JOB_ID) ;

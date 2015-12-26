@@ -34,10 +34,10 @@
 		            </ul>
 		        </li>		
 		        <li><a href="postNewJob.jsp">Post New Job</a></li>
-				<li><a href="myNotification.jsp">My Notification</a></li>
+				
 		      	<li><a href="login.jsp">Login</a></li>
 				<li><a href="register.jsp">Register</a></li>
-				<li><a href="myProfile.jsp">My Profile</a></li>
+				
 		        
 					
 				
@@ -47,7 +47,7 @@
     				{
     					if(buddy.getEmailId()!=""){
 				%>
-			<li class="dropdown">
+					<li class="dropdown">
 		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jobs<b class="caret"></b></a>
 		            <ul class="dropdown-menu">
 			            <li><a href="viewAvailableJobs.jsp">View All Available Jobs </a></li>
@@ -61,7 +61,7 @@
 				<li><a href="myNotification.jsp">My Notification</a></li>
 		   		<li><a href="myProfile.jsp">My Profile</a></li>
 			
-		        <li><%=buddy.getEmailId() %></li>
+		        <!--   <li><%=buddy.getEmailId() %></li>   -->
 				
 		        <li><a href="logout.jsp">Logout</a></li>
 				

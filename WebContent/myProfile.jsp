@@ -35,18 +35,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="single">  
 	   <div class="form-container">
         <h2>My Profile</h2>
-       					 <div class="row">
+       					
         				<%
 		 					   if(null!=request.getAttribute("errorMessage"))
 							    {
-		 				%>
-		 						  <%=request.getAttribute("errorMessage") %>
-		 						  
+		 				%>			
+		 				 <center><div class="row" style="background-color: #33FF00; padding-bottom:2%; width:70%">
+       					 <center><p style="color: white; padding-top: 2%"><%=request.getAttribute("errorMessage") %></p></center>
+						</div><center>
 							      
 						<%
 							    }
 						%>
-						</div>
+					
 		<%if(buddy==null){ %>
 		<div class="row">
             <div class="form-group col-md-12">
@@ -151,16 +152,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         
         <div class="row">
             <div class="form-actions floatRight">
-                <input type="submit" value="Update My Profile" class="btn btn-primary btn-sm">
-            </div>
+                <center><input type="submit" value="Update My Profile" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#applyModal"></center>
+                </div>
         </div>
+        
     </form>
     <%} %>
     </div>
  </div>
 </div>
 
-<%@ include file="footer.jsp" %>
+
+
+	<%@ include file="footer.jsp" %>
+
+
 
 
 </body>

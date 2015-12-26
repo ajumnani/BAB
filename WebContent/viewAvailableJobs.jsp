@@ -154,7 +154,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					      	</div>
 					      	<%if(buddy==null){ %>
 	                        <div class="modal-body">
-					          Before you apply you have to login as a candidate			
+					          Before you apply you have to login as a Buddy			
 					          <p><a href="login.jsp">Log in</a></p>
 					      	</div>
 					      	<%}else{
@@ -166,7 +166,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							
 							<div class="modal-header">
 					        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-					        	<h4 class="modal-title" id="myModalLabel">Apply Job with below details. Owner of this Job will contact you shortly</h4>
+					        	<h4 class="modal-title" id="myModalLabel">Below details will be sent to Owner opfo this Job. They will contact you.</h4>
 					      	</div>
 	                        <div class="modal-body">
 							<form method="Post" action="applyJob.jsp">
