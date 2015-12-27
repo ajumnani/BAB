@@ -48,9 +48,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			  <li role="presentation" class="active"><a href="#myapplied" id="myapplied-tab" role="tab" data-toggle="tab" aria-controls="myapplied" aria-expanded="true">My Applied Jobs</a></li>
 			  <li role="presentation"><a href="#myposted" role="tab" id="myposted-tab" data-toggle="tab" aria-controls="myposted">My Posted Jobs</a></li>
 		   </ul>
+		   
 		<div id="myTabContent" class="tab-content">
 		  
-		  
+		  <%
+		 					   if(null!=request.getAttribute("errorMessage"))
+							    {
+		 				%>			
+		 				 <center>
+		 				 <div class="row" style="background-color: #33FF00; padding-bottom:2%; width:70%">
+       					 <center><p style="color: white; padding-top: 2%"><%=request.getAttribute("errorMessage") %></p></center>
+						</div>
+						</center>
+							      
+						<%
+							    }
+						%>
+		       
 		  <%
 		   
 		   List<JobPost> myAppliedJobs=new ArrayList<JobPost>();
@@ -92,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   		
 		   		if(buddy!=null){
 		   		//My Posted Jobs Starts here
-		        String sqlMyPostedJobs = "select * from job_posts where job_poster_email=? order by job_post_date desc";
+		        String sqlMyPostedJobs = "select * from job_posts where job_poster_email=? and flag='Y' order by job_post_date desc";
 				
 		    	stmt = conn.prepareStatement(sqlMyPostedJobs);
 				stmt.setString(1, buddy.getEmailId());
@@ -166,9 +180,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						Company : <%=jobPost.getCompanyName()%><br>
 						Experience require : <%=jobPost.getExpLevel()%> <br>
 						Skills : <%=jobPost.getSkills() %> <br>
-						
+												  
+							
                     </div>
 					<div class="clearfix"> </div>
+					
 				</div>
 			 </div>
 			  <%}
@@ -191,7 +207,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			%>	 
 			 <div class="tab_grid">
 			    <div class="jobs-item with-thumb">
-				    
+				    <form method="post" action="deleteJob.jsp">
 				    <div class="jobs_right">
 						<div class="date"><%=jobPost.getJobPostDate() %></div>
 						<div class="date_desc"><h6 class="title"><a href="jobs_single.html"><%=jobPost.getJobTitle() %></a></h6>
@@ -207,6 +223,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						
                     </div>
 					<div class="clearfix"> </div>
+					<input type="hidden" name="jobId" value="<%=jobPost.getJobID() %>" >	
+					<input type="hidden" name="jobPosterEmail" value="<%=jobPost.getJobPosterEmail() %>" >	
+					
+					<input type="submit" value="Delete Job" class="btn btn-primary btn-sm">	
+					</form>
 				</div>
 			 </div>
 			  <%}

@@ -12,6 +12,8 @@
     String company = request.getParameter("company");
     String exp = request.getParameter("exp");
     String skills = request.getParameter("skills");
+    String location = request.getParameter("location");
+    
     Buddy buddy=new Buddy();
     buddy=(Buddy)session.getAttribute("buddy");
     String jobPosterName=buddy.getBuddyFirstName();
@@ -23,7 +25,7 @@
     conn=db.getJNDIConnection();
     try{
         
-            String sql="insert into job_posts(job_id,job_poster_name, job_poster_email, job_tittle, job_description,job_company,job_exp_level,job_skills) values (seq_jobid.NEXTVAL,?,?,?,?,?,?,?)";    
+            String sql="insert into job_posts(job_id,job_poster_name, job_poster_email, job_tittle, job_description,job_company,job_exp_level,job_skills,job_location) values (seq_jobid.NEXTVAL,?,?,?,?,?,?,?,?)";    
 		    stmt=conn.prepareStatement(sql);
     	    stmt.setString(1, jobPosterName);
     	    stmt.setString(2, jobPosterEmail);
@@ -32,6 +34,8 @@
     	    stmt.setString(5, company);
     	    stmt.setString(6, exp);
     	    stmt.setString(7, skills);
+    	    stmt.setString(8, location);
+    	    
     	    
     	    
     	    //ResultSet rs;

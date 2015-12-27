@@ -12,7 +12,15 @@ public class JobPost {
 	private String companyName;
 	private String expLevel;
 	private String skills;
+	private String jobLocation;
 	
+	
+	public String getJobLocation() {
+		return jobLocation;
+	}
+	public void setJobLocation(String jobLocation) {
+		this.jobLocation = jobLocation;
+	}
 	public String getSkills() {
 		return skills;
 	}

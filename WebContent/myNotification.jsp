@@ -78,7 +78,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        	myNotiObj.setJobAppliedDate(rs.getString("job_applied_date"));
 		        	myNotiObj.setJobApplierName(rs.getString("job_applier_name"));
 		        	myNotiObj.setJobApplierContact(rs.getString("job_applier_contact"));
-		        	myNotiObj.setJobApplierEmail(rs.getString("job_applier_email"));
+		        	myNotiObj.setJobApplierEmail(rs.getString("applier_buddy_email"));
 		        	myNotifications.add(myNotiObj);
 		        }
 		        }

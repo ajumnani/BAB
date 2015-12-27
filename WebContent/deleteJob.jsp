@@ -7,10 +7,8 @@
 
 <%
         
-    String name = request.getParameter("name");
-    String email = request.getParameter("email");
-    String contact = request.getParameter("contact");
-	String company=request.getParameter("company");
+    String jobId = request.getParameter("jobId");
+    String jobPosterEmail = request.getParameter("jobPosterEmail");
     Connection conn=null;
     PreparedStatement stmt=null;    
     try{
@@ -18,46 +16,42 @@
         conn=db.getJNDIConnection();
         Buddy buddy=(Buddy)session.getAttribute("buddy");
         	if(buddy!=null){
-          	String sql="UPDATE buddy SET first_name = ?,contact=?,company_name=? WHERE email = ?";
-          	stmt=conn.prepareStatement(sql);
-    	    stmt.setString(1, name);
-    	    stmt.setString(2, contact);
-    	    stmt.setString(3, company);
-    	    stmt.setString(4,buddy.getEmailId() );
-    	    //ResultSet rs;
-    	    int i = stmt.executeUpdate();
+          	
     	    
-		    sql="UPDATE applied_jobs SET job_applier_name = ?,job_applier_contact=? WHERE applier_buddy_email = ?";
-    	    stmt=conn.prepareStatement(sql);
-    	    stmt.setString(1, name);
-    	    stmt.setString(2, contact);
-    	    stmt.setString(3,buddy.getEmailId() );
-    	    stmt.executeUpdate();
-    	    
-			sql="UPDATE job_posts SET job_poster_name = ? WHERE job_poster_email = ?";
+		   
+    	    if(jobPosterEmail.equalsIgnoreCase(buddy.getEmailId())){
+			String sql="UPDATE job_posts SET flag = ? WHERE job_poster_email = ? and job_id=?";
           	stmt=conn.prepareStatement(sql);
-    	    stmt.setString(1, name);
+    	    stmt.setString(1, "N");
     	    stmt.setString(2,buddy.getEmailId() );
-    	    stmt.executeUpdate();
+    	    stmt.setString(3,jobId );
+    	    
+    	    int i=stmt.executeUpdate();
     	     	    
     	    if (i > 0) {
     	        //session.setAttribute("userid", user);
     	         
-    	         request.setAttribute("errorMessage", "Profile Updated Successfull");
-    		   	 RequestDispatcher rd = request.getRequestDispatcher("/myProfile.jsp");
+    	         request.setAttribute("errorMessage", "Job deleted Successfull");
+    		   	 RequestDispatcher rd = request.getRequestDispatcher("/viewMyJobs.jsp");
     		     rd.forward(request, response);   
     	    } 
     	    else {   
 
     	   	   	      
     	   	   	 request.setAttribute("errorMessage", "Some Technical Problem occured,please retry");
-    	   	   	 RequestDispatcher rd = request.getRequestDispatcher("/myProfile.jsp");
+    	   	   	 RequestDispatcher rd = request.getRequestDispatcher("/viewMyJobs.jsp");
     	   	     rd.forward(request, response);    	    	
     	    }   
+        	}else{
+        	 request.setAttribute("errorMessage", "You tried to delete job which was not posted by you");
+   	   	   	 RequestDispatcher rd = request.getRequestDispatcher("/viewMyJobs.jsp");
+   	   	     rd.forward(request, response); 
+        	}
+    	    
         	}
         	else{
         		
-    	   	   	 RequestDispatcher rd = request.getRequestDispatcher("/myProfile.jsp");
+    	   	   	 RequestDispatcher rd = request.getRequestDispatcher("/viewMyJobs.jsp");
     	   	     rd.forward(request, response); 
         	}
         	

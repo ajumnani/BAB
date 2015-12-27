@@ -29,6 +29,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!----font-Awesome----->
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <!----font-Awesome----->
+
+<script type="text/javascript">
+$(document).on("click", ".open-ApplyJobDialog", function () {
+    var myJobId = $(this).data('id');
+   
+    var newJobId=myJobId.substring(0,myJobId.indexOf(",")) ; //jobId
+    var myPosterEmail=myJobId.substring(myJobId.indexOf(",")+1) ; //posterEmail
+	
+    $(".modal-body #jobId").val( newJobId );
+    $(".modal-body #posterEmail").val( myPosterEmail );
+    
+});
+
+
+</script>
+
 </head>
 <body>
 
@@ -42,6 +58,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="col-sm-10 follow_left">
 			<h3>Latest Available Jobs</h3>
         				
+		               	<%
+		 					   if(null!=request.getAttribute("errorMessage"))
+							    {
+		 				%>			
+		 				 <center>
+		 				 <div class="row" style="background-color: #33FF00; padding-bottom:2%; width:70%">
+       					 <center><p style="color: white; padding-top: 2%"><%=request.getAttribute("errorMessage") %></p></center>
+						</div>
+						</center>
+							      
+						<%
+							    }
+						%>
 		       
 		
 		   
@@ -60,7 +89,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        System.out.println("Creating statement...");
 		   		conn=db.getJNDIConnection();
 		        //All Jobs Starts here
-		    	String sqlAllJobs = "select * from job_posts order by job_post_date desc";
+		    	String sqlAllJobs = "select * from job_posts where flag!='N' order by job_post_date desc";
 		    	stmt = conn.prepareStatement(sqlAllJobs);
 		    	System.out.println("Creating statement... 2");
 		    	rs = stmt.executeQuery();
@@ -75,7 +104,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        	jobPost.setJobTitle(rs.getString("job_tittle"));
 		        	jobPost.setJobPostDate(rs.getString("job_post_date"));
 					jobPost.setSkills(rs.getString("job_skills"));
-		        	allJobs.add(jobPost);
+		        	jobPost.setJobLocation(rs.getString("job_location"));
+					allJobs.add(jobPost);
 					
 		        }
 		        
@@ -114,9 +144,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			%>
 		   <div class="jobs_follow jobs-single-item">
 				<div class="thumb_right">
-				<div class="date"><%=jobPost.getJobPostDate() %></div>
+				<div class="date">21 <span>Dec</span></div>
 				<h6 class="title"><a href="#"><%=jobPost.getJobTitle() %></a></h6>
-				
+				<span class="meta"><%=jobPost.getJobLocation()%></span>
 				<ul class="top-btns">
 					<li>
 						<a href="#" class="btn_1 fa fa-star-o icon_2"></a>
@@ -131,28 +161,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				
 				
                 <hr>
-                <a href="#" class="btn btn-default pull-left" data-toggle="modal" data-target="#applyModal">Apply for this Job</a>
+                <a href="#" class="open-ApplyJobDialog btn btn-primary" data-toggle="modal" data-id="<%=jobPost.getJobID() %>,<%=jobPost.getJobPosterEmail() %>" data-target="#applyJobDialog">Apply for this Job</a>
 	         
 				</div>
 				</div>
 						<%} %>		 
 			 
 	
-	<script>
-	$('#applyModal').on('show.bs.modal', function (e) {
-		  var $invoker = $(e.relatedTarget);
-		  alert($invoker);
-		});
-	</script>
-				<!-- Modal -->
-				<div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
+	
+				<!-- Modal If -->
+				<div class="modal fade" id="applyJobDialog" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
 				  	<div class="modal-dialog">
 				    	<div class="modal-content">
+					      	<%if(buddy==null){ %>
 					      	<div class="modal-header">
 					        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 					        	<h4 class="modal-title" id="myModalLabel">Apply for this job</h4>
 					      	</div>
-					      	<%if(buddy==null){ %>
+					      	
 	                        <div class="modal-body">
 					          Before you apply you have to login as a Buddy			
 					          <p><a href="login.jsp">Log in</a></p>
@@ -176,8 +202,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							  Contact No : <input type="text" path="contact" id="contact" class="form-control input-sm" value="<%=buddy.getContactNumber()%>" name="contact"/>
 							  <%
 							  String jobId=request.getParameter("job_id");
-							  %>	
-							  JOB ID : <input type="text" path="jobid" id="jobid" class="form-control input-sm" value="<%=jobId%>" name="contact"/>
+							  %>
+							   <input type="hidden" name="jobId" id="jobId" value="" />
+							   <input type="hidden" name="posterEmail" id="posterEmail" value="" />
+							 		
 							  <br>
 							  <input type="submit" value="Apply Job" class="btn btn-primary btn-sm">							  
 							 </form>
@@ -187,6 +215,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							
 				    	</div>
 				  	</div>
+				  	
+				  	
+				  	
+				  	
 				
 <!-- 	            <ul class="social-icons pull-right">
 					<li><span>Share : </span></li>
@@ -194,13 +226,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<li><a href="#" class="fa fa-twitter" target="_blank"></a></li>
 					<li><a href="#" class="fa fa-google-plus" target="_blank"></a></li>
 				</ul> -->
-				<div class="clearfix"> </div>
-		    </div>
-		   <div class="clearfix"> </div>
-		   </div>
-		   
-		   
-		   
+					   
 
 		   
 		   
@@ -211,12 +237,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    
 	    </div>
 		
-		<div class="clearfix"> </div>
-	</div>
+		</div>
 </div>
 
 
-
+</div>
 
 
 </body>
