@@ -169,8 +169,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			    <div class="jobs-item with-thumb">
 				    
 				    <div class="jobs_right">
-						<div class="date"><%=jobPost.getJobPostDate() %></div>
+						<div class="date">21<span>Jan</span></div>
 						<div class="date_desc"><h6 class="title"><a href="jobs_single.html"><%=jobPost.getJobTitle() %></a></h6>
+						<span class="meta"><%=jobPost.getJobLocation()%></span>
 						  
 						</div>
 						<div class="clearfix"> </div>
@@ -191,7 +192,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			}
 		    else{
 				 %>
-				<a href="login.jsp">Please login to view this</a>				 
+				<div class="row">
+            		<div class="form-actions floatRight">
+            			<br><br>
+               		 	<a href="login.jsp">Please login to view this</a>
+            		</div>
+        		</div>
+				
+								 
 			 <% }%>
 			
 			
@@ -209,8 +217,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			    <div class="jobs-item with-thumb">
 				    <form method="post" action="deleteJob.jsp">
 				    <div class="jobs_right">
-						<div class="date"><%=jobPost.getJobPostDate() %></div>
+						<div class="date">21<span>Dec</span></div>
 						<div class="date_desc"><h6 class="title"><a href="jobs_single.html"><%=jobPost.getJobTitle() %></a></h6>
+						<span class="meta"><%=jobPost.getJobLocation()%></span>
 						  
 						</div>
 						<div class="clearfix"> </div>
@@ -234,7 +243,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    }
 		    else{
 				 %>
-				<a href="login.jsp">Please login to view this</a>				 
+				 <div class="form-actions floatRight">
+            			<br><br>
+               		 	<a href="login.jsp">Please login to view this</a>
+            		</div>
+							 
 			 <% }%>
 			
 			 

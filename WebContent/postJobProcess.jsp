@@ -25,7 +25,7 @@
     conn=db.getJNDIConnection();
     try{
         
-            String sql="insert into job_posts(job_id,job_poster_name, job_poster_email, job_tittle, job_description,job_company,job_exp_level,job_skills,job_location) values (seq_jobid.NEXTVAL,?,?,?,?,?,?,?,?)";    
+            String sql="insert into job_posts(job_id,job_poster_name, job_poster_email, job_tittle, job_description,job_company,job_exp_level,job_skills,job_location,flag) values (seq_jobid.NEXTVAL,?,?,?,?,?,?,?,?,'Y')";    
 		    stmt=conn.prepareStatement(sql);
     	    stmt.setString(1, jobPosterName);
     	    stmt.setString(2, jobPosterEmail);

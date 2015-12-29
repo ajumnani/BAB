@@ -39,14 +39,19 @@
            	    RequestDispatcher rd = request.getRequestDispatcher("/viewAvailableJobs.jsp");
                 rd.forward(request, response);  
             } else {
+            	
+            
             	 sql="insert into applied_jobs(applier_buddy_email, job_id, job_poster_email, job_applier_contact,job_applier_name) values (?,?,?,?,?)";    
-    		    
+    			
+    			
+    			
         	    stmt=conn.prepareStatement(sql);
         	    stmt.setString(1, applierEmail);
         	    stmt.setString(2, jobId);
         	    stmt.setString(3, posterEmail);
         	    stmt.setString(4, applierContact);
         	    stmt.setString(5, applierName);
+        	   
         	    
         	       	    
         	    

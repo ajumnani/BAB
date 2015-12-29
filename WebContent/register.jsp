@@ -24,6 +24,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <!----font-Awesome----->
 </head>
+
+
 <body>
 
 <%@ include file="header.jsp" %>
@@ -46,14 +48,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						%>
 						</div>
         <h2>Registration Form</h2>
-        <form method="post" action="registerProcess.jsp">
+        <form method="post"  action="registerProcess.jsp">
          
             
          </div><div class="row">
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="lastname"> Name</label>
                 <div class="col-md-9">
-                    <input type="text" path="lastname" id="lastname" class="form-control input-sm" name="name"/>
+                    <input type="text" path="lastname" id="lastname" class="form-control input-sm" name="name" required/>
                 </div>
             </div>
          </div>
@@ -62,26 +64,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="email">Email ID</label>
                 <div class="col-md-9">
-                    <input type="text" path="email" id="email" class="form-control input-sm" name="email"/>
+                    <input type="email" path="email" id="email" class="form-control input-sm" name="email" required/>
                 </div>
             </div>
          </div>
          <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="password">Password</label>
+                <label class="col-md-3 control-lable" for="password">Set Your Password</label>
                 <div class="col-md-9">
-                    <input type="text" path="Password" id="Password" class="form-control input-sm" name="pass"/>
+                    <input type="password" path="Password" id="password" class="form-control input-sm" name="pass" required/>
                 </div>
             </div>
         </div>
-		<div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="confirmpass">Confirm Password</label>
-                <div class="col-md-9">
-                    <input type="text" path="confirmpass" id="confirmpass" class="form-control input-sm" name="confpass"/>
-                </div>
-            </div>
-        </div>
+		
         
 		<div class="row">
             <div class="form-group col-md-12">
@@ -105,7 +100,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         
         <div class="row">
             <div class="form-actions floatRight">
-                <input type="submit" value="Register" class="btn btn-primary btn-sm">
+               <input type="submit" value="Register" class="btn btn-primary btn-sm">
+              
             </div>
         </div>
         				

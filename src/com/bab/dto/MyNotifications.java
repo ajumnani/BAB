@@ -6,6 +6,7 @@ public class MyNotifications {
 	private String jobApplierName;
 	private String jobApplierEmail;
 	private String jobApplierContact;
+	private String jobLocation;
 	public String getJobAppliedDate() {
 		return jobAppliedDate;
 	}
@@ -37,6 +38,12 @@ public class MyNotifications {
 		this.jobTitle = jobTitle;
 	}
 	
+	public String getJobLocation() {
+		return jobLocation;
+	}
+	public void setJobLocation(String jobLocation) {
+		this.jobLocation = jobLocation;
+	}
 	
 
 }

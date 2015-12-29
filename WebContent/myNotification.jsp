@@ -14,7 +14,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Seeking an Job Portal Category Flat Bootstarp Resposive Website Template | Location :: w3layouts</title>
+<title>My Notification | Bring Any Buddy (BAB) JOB PORTAL</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Seeking Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
@@ -79,6 +79,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        	myNotiObj.setJobApplierName(rs.getString("job_applier_name"));
 		        	myNotiObj.setJobApplierContact(rs.getString("job_applier_contact"));
 		        	myNotiObj.setJobApplierEmail(rs.getString("applier_buddy_email"));
+		        	myNotiObj.setJobLocation(rs.getString("job_location"));
 		        	myNotifications.add(myNotiObj);
 		        }
 		        }
@@ -123,9 +124,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			    <div class="col-sm-9">
 			       <div class="location_box1">
 			    	 <h6><a href=""><%=myNotify.getJobTitle() %> </a><span class="m_1">Applied On <%=myNotify.getJobAppliedDate() %></span></h6>
-					 <p><span class="m_2">Name : </span><%=myNotify.getJobApplierName() %></p>
-			    	 <p><span class="m_2">Email ID : </span><%=myNotify.getJobApplierEmail() %></p>
-					 <p><span class="m_2">Contact No : </span><%=myNotify.getJobApplierContact()%></p>
+					 <p><span class="m_2">Applied Budy Name : </span><%=myNotify.getJobApplierName() %></p>
+			    	 <p><span class="m_2">Apply Buddy Email ID : </span><%=myNotify.getJobApplierEmail() %></p>
+					 <p><span class="m_2">Apply Buddy Contact No : </span><%=myNotify.getJobApplierContact()%></p>
 			    	 
 				   </div>
 			    </div>

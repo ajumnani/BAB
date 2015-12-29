@@ -40,10 +40,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		 					   if(null!=request.getAttribute("errorMessage"))
 							    {
 		 				%>			
-		 				 <center><div class="row" style="background-color: #33FF00; padding-bottom:2%; width:70%">
-       					 <center><p style="color: white; padding-top: 2%"><%=request.getAttribute("errorMessage") %></p></center>
-						</div><center>
-							      
+		 				 
+       					 <div class="row">
+            				<div class="form-actions floatRight">
+                				<font color="green">My Profile successfully updated</a></font>
+            					</div>
+        				</div>
+						<br>	      
 						<%
 							    }
 						%>
@@ -126,7 +129,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="firstName">Name :</label>
                 <div class="col-md-9">
-                    <input type="text" path="Username" id="Username" class="form-control input-sm" value="<%=buddy.getBuddyFirstName()%>" name="name"/>
+                    <input type="text" path="Username" id="Username" class="form-control input-sm" value="<%=buddy.getBuddyFirstName()%>" name="name" required/>
                 </div>
             </div>
          </div>
@@ -134,7 +137,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="lastName">Current Company :</label>
                 <div class="col-md-9">
-                    <input type="text" path="Password" id="Password" class="form-control input-sm" value="<%=buddy.getCompanyName()%>" name="company"/>
+                    <input type="text" path="Password" id="Password" class="form-control input-sm" value="<%=buddy.getCompanyName()%>" name="company" required/>
                 </div>
             </div>
         </div>
@@ -142,7 +145,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="lastName">Contact Number :</label>
                 <div class="col-md-9">
-                    <input type="text" path="ConfirmPassword" id="ConfirmPassword" class="form-control input-sm" value="<%=buddy.getContactNumber()%>" name="contact"/>
+                    <input type="text" path="ConfirmPassword" id="ConfirmPassword" class="form-control input-sm" value="<%=buddy.getContactNumber()%>" name="contact" required/>
                 </div>
             </div>
         </div>

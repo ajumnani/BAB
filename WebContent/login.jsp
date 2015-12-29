@@ -81,7 +81,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                      
                      <div class="forgot">
 						  <div class="login-para">
-				 			<p><a href="#"> Forgot Password? </a></p>
+				 			<p><a href="">Forgot Password? (Please email to us from your register email id) </a></p>
 				 		 </div>
 					     <div class="clearfix"> </div>
 			        </div>
@@ -92,13 +92,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 <p>With your social media account</p>
 					 <div class="social-icons">
 						<div class="button">
+							
+							<!-- 
 							<a class="tw" href="#"> <i class="fa fa-twitter tw2"> </i><span>Twitter</span>
 							<div class="clearfix"> </div></a>
-							<a class="fa" href="<%=fbConnection.getFBAuthUrl()%>"> <i class="fa fa-facebook tw2"> </i><span>Facebook</span>
+							 -->
+							 <a class="fa" href="<%=fbConnection.getFBAuthUrl()%>"> <i class="fa fa-facebook tw2"> </i><span>Facebook</span>
 							<div class="clearfix"> </div></a>
+							<!-- 
 							<a class="go" href="#"><i class="fa fa-google-plus tw2"> </i><span>Google+</span>
 							<div class="clearfix"> </div></a>
-							<div class="clearfix"> </div>
+							 -->
+							 <div class="clearfix"> </div>
 						</div>
 						<h4>Don't have an Account? <a href="register.jsp"> Register Now!</a></h4>
 					 </div>

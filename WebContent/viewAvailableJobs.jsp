@@ -56,17 +56,19 @@ $(document).on("click", ".open-ApplyJobDialog", function () {
 <div class="container">
     <div class="single">  
         <div class="col-sm-10 follow_left">
-			<h3>Latest Available Jobs</h3>
+			 <h2>Latest Available Jobs</h2>
+			 
         				
 		               	<%
 		 					   if(null!=request.getAttribute("errorMessage"))
 							    {
 		 				%>			
-		 				 <center>
-		 				 <div class="row" style="background-color: #33FF00; padding-bottom:2%; width:70%">
-       					 <center><p style="color: white; padding-top: 2%"><%=request.getAttribute("errorMessage") %></p></center>
-						</div>
-						</center>
+		 					 <div class="row">
+            					<div class="form-actions floatRight">
+                					<font color="green">Your New Job Successfully added..</a></font>
+            					</div>
+        					</div>
+							<br>
 							      
 						<%
 							    }
@@ -89,7 +91,7 @@ $(document).on("click", ".open-ApplyJobDialog", function () {
 		        System.out.println("Creating statement...");
 		   		conn=db.getJNDIConnection();
 		        //All Jobs Starts here
-		    	String sqlAllJobs = "select * from job_posts where flag!='N' order by job_post_date desc";
+		    	String sqlAllJobs = "select JOB_ID,JOB_POSTER_NAME,JOB_POSTER_EMAIL,JOB_TITTLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP_LEVEL,TO_CHAR(JOB_POST_DATE,'DD-Mon-YYYY') JOB_POST_DATE,JOB_SKILLS,FLAG from job_posts where flag!='N' order by job_post_date desc";
 		    	stmt = conn.prepareStatement(sqlAllJobs);
 		    	System.out.println("Creating statement... 2");
 		    	rs = stmt.executeQuery();
@@ -145,11 +147,11 @@ $(document).on("click", ".open-ApplyJobDialog", function () {
 		   <div class="jobs_follow jobs-single-item">
 				<div class="thumb_right">
 				<div class="date">21 <span>Dec</span></div>
-				<h6 class="title"><a href="#"><%=jobPost.getJobTitle() %></a></h6>
+				<h6 class="title"><%=jobPost.getJobTitle() %></h6>
 				<span class="meta"><%=jobPost.getJobLocation()%></span>
 				<ul class="top-btns">
 					<li>
-						<a href="#" class="btn_1 fa fa-star-o icon_2"></a>
+						
 					</li>
 				</ul>
 				<br>

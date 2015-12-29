@@ -24,15 +24,10 @@
 				%>
 				
 				
-				<li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jobs<b class="caret"></b></a>
-		            <ul class="dropdown-menu">
-			            <li><a href="viewAvailableJobs.jsp">View All Available Jobs </a></li>
-						<li><a href="viewMyJobs.jsp">View My Applied/Posted Jobs </a></li>
+				
+		        <li><a href="viewAvailableJobs.jsp"> All Jobs </a></li>
+				<li><a href="viewMyJobs.jsp">My Applied/Posted Jobs</a></li>
 						
-						
-		            </ul>
-		        </li>		
 		        <li><a href="postNewJob.jsp">Post New Job</a></li>
 				
 		      	<li><a href="login.jsp">Login</a></li>
@@ -47,16 +42,10 @@
     				{
     					if(buddy.getEmailId()!=""){
 				%>
-					<li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jobs<b class="caret"></b></a>
-		            <ul class="dropdown-menu">
-			            <li><a href="viewAvailableJobs.jsp">View All Available Jobs </a></li>
-						<li><a href="viewMyJobs.jsp">View My Applied/Posted Jobs </a></li>
-						
-						
-		            </ul>
-		        </li>
-		        
+					
+					
+				<li><a href="viewAvailableJobs.jsp"> All Jobs </a></li>
+				<li><a href="viewMyJobs.jsp">My Applied/Posted Jobs</a></li>
 		        <li><a href="postNewJob.jsp">Post New Job</a></li>
 				<li><a href="myNotification.jsp">My Notification</a></li>
 		   		<li><a href="myProfile.jsp">My Profile</a></li>
