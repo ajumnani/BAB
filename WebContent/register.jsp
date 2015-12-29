@@ -23,7 +23,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!----font-Awesome----->
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <!----font-Awesome----->
+<script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+
 </head>
+
+
 
 
 <body>
@@ -35,68 +50,75 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="container">
     <div class="single">  
 	   <div class="form-container">
-	   <div class="row">
+	   <h2>Registration Form</h2>
+       <form method="post" onsubmit="onclick="return Validate()" action="registerProcess.jsp">
+         
+       
         				<%
 		 					   if(null!=request.getAttribute("errorMessage"))
 							    {
 		 				%>
-		 						  <%=request.getAttribute("errorMessage") %>
-		 						  
-							      
+		 				<div>
+		 					<center><h4><font color="<%=request.getAttribute("errorColor") %>"><%=request.getAttribute("errorMessage") %></font></h4></center>
+		 				 </div>	      
 						<%
 							    }
 						%>
-						</div>
-        <h2>Registration Form</h2>
-        <form method="post"  action="registerProcess.jsp">
-         
-            
-         </div><div class="row">
+	
+             
+         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="lastname"> Name</label>
+                <label class="col-md-3 control-lable" > Email Id :</label>
                 <div class="col-md-9">
-                    <input type="text" path="lastname" id="lastname" class="form-control input-sm" name="name" required/>
+                    <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="emailId" class="form-control input-sm" name="emailId" required/>
                 </div>
             </div>
          </div>
          
           <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="email">Email ID</label>
+                <label class="col-md-3 control-lable">Password :</label>
                 <div class="col-md-9">
-                    <input type="email" path="email" id="email" class="form-control input-sm" name="email" required/>
+                    <input type="password"  id="password" class="form-control input-sm" name="password" required/>
                 </div>
             </div>
          </div>
          <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="password">Set Your Password</label>
+                <label class="col-md-3 control-lable" >Confirm Password :</label>
                 <div class="col-md-9">
-                    <input type="password" path="Password" id="password" class="form-control input-sm" name="pass" required/>
+                    <input type="password" id="confirmPassword" class="form-control input-sm" name="confirmPassword" required/>
                 </div>
             </div>
         </div>
 		
-        
-		<div class="row">
+		
+		 <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="contact">Contact(Optional)</label>
+                <label class="col-md-3 control-lable" >Name :</label>
                 <div class="col-md-9">
-                    <input type="text" path="contact" id="contact" class="form-control input-sm" name="contact"/>
+                    <input type="text" id="name" class="form-control input-sm" name="name" required/>
                 </div>
             </div>
         </div>
-        
-       <div class="row">
+		
+		 <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="contact">Company(Optional)</label>
+                <label class="col-md-3 control-lable" >Contact No (Optional) :</label>
                 <div class="col-md-9">
-                    <input type="text" path="contact" id="contact" class="form-control input-sm" name="company"/>
+                    <input type="text" pattern="[0-9]{10}" id="contactNo" class="form-control input-sm" name="contactNo" />
                 </div>
             </div>
         </div>
-        
-        
+		
+         <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" >Current Company (Optional) :</label>
+                <div class="col-md-9">
+                    <input type="text" id="currentCompany" class="form-control input-sm" name="currentCompany" />
+                </div>
+            </div>
+        </div>
         
         <div class="row">
             <div class="form-actions floatRight">

@@ -4,8 +4,8 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
-    String email = request.getParameter("email");    
-    String pwd = request.getParameter("pass");
+    String email = request.getParameter("emailid");    
+    String pwd = request.getParameter("password");
     
     Connection conn=null;
     DBConnecction db=new DBConnecction();
@@ -16,7 +16,7 @@
     try{    //: Execute a query
         System.out.println("Creating statement...");
         
-    	String sql = "select * from buddy where email=? and pass=?";
+    	String sql = "SELECT * FROM  BAB_PROFILE where EMAIL_ID=? and PASSWORD=?";
     	stmt = conn.prepareStatement(sql);
 	
     	stmt.setString(1, email);
@@ -28,13 +28,14 @@
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
         	System.out.println("Success");
-        	buddy.setBuddyFirstName(rs.getString("first_name"));
         	
-        	buddy.setEmailId(rs.getString("email"));
-        	buddy.setCompanyName(rs.getString("company_name"));
-        	buddy.setContactNumber(rs.getString("contact"));
+        	buddy.setEmailId(rs.getString("EMAIL_ID"));
+        	buddy.setBuddyName(rs.getString("NAME"));
+        	buddy.setContactNo(rs.getString("CONTACT_NO"));
+        	buddy.setCurrentCompanyName(rs.getString("CURRENT_COMPANY_NAME"));
+        	
             session.setAttribute("buddy", buddy);
-            response.sendRedirect("viewAvailableJobs.jsp");
+            response.sendRedirect("register.jsp");
         } else {
         	 session.invalidate();        
         	 request.setAttribute("errorMessage", "Invalid Username or Password");

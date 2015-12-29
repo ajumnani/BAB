@@ -7,10 +7,12 @@
 
 <%
         
-    String name = request.getParameter("name");
-    String email = request.getParameter("email");
-    String contact = request.getParameter("contact");
-	String company=request.getParameter("company");
+   
+    String emailId = request.getParameter("emailId");
+	String name = request.getParameter("name");
+    String contactNo = request.getParameter("contactNo");
+	String currentCompanyName=request.getParameter("currentCompanyName");
+	
     Connection conn=null;
     PreparedStatement stmt=null;    
     try{
@@ -18,16 +20,16 @@
         conn=db.getJNDIConnection();
         Buddy buddy=(Buddy)session.getAttribute("buddy");
         	if(buddy!=null){
-          	String sql="UPDATE buddy SET first_name = ?,contact=?,company_name=? WHERE email = ?";
+          	String sql="UPDATE BAB_PROFILE SET NAME = ?, CONTACT_NO=?, CURRENT_COMPANY_NAME =? , update_date = sysdate WHERE EMAIL_ID = ?";
           	stmt=conn.prepareStatement(sql);
     	    stmt.setString(1, name);
-    	    stmt.setString(2, contact);
-    	    stmt.setString(3, company);
+    	    stmt.setString(2, contactNo);
+    	    stmt.setString(3, currentCompanyName);
     	    stmt.setString(4,buddy.getEmailId() );
     	    //ResultSet rs;
     	    int i = stmt.executeUpdate();
     	    
-		    sql="UPDATE applied_jobs SET job_applier_name = ?,job_applier_contact=? WHERE applier_buddy_email = ?";
+		    /* sql="UPDATE applied_jobs SET job_applier_name = ?,job_applier_contact=? WHERE applier_buddy_email = ?";
     	    stmt=conn.prepareStatement(sql);
     	    stmt.setString(1, name);
     	    stmt.setString(2, contact);
@@ -38,12 +40,12 @@
           	stmt=conn.prepareStatement(sql);
     	    stmt.setString(1, name);
     	    stmt.setString(2,buddy.getEmailId() );
-    	    stmt.executeUpdate();
+    	    stmt.executeUpdate(); */
     	     	    
     	    if (i > 0) {
     	        //session.setAttribute("userid", user);
     	         
-    	         request.setAttribute("errorMessage", "Profile Updated Successfull");
+    	         request.setAttribute("errorMessage", "Profile Updated.....");
     		   	 RequestDispatcher rd = request.getRequestDispatcher("/myProfile.jsp");
     		     rd.forward(request, response);   
     	    } 

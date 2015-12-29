@@ -6,12 +6,13 @@
 
 <%
         
-    String name = request.getParameter("name");
-    String email = request.getParameter("email");
-    String pass = request.getParameter("pass");
-    String confpass = request.getParameter("confpass");
-    String contact = request.getParameter("contact");
-	String company=request.getParameter("company");
+    String emailId = request.getParameter("emailId");
+	String name = request.getParameter("name");
+	String password = request.getParameter("password");
+    String confirmPassword = request.getParameter("confirmPassword");
+    String contactNo = request.getParameter("contactNo");
+	String currentCompany=request.getParameter("currentCompany");
+	
     Connection conn=null;
     PreparedStatement stmt=null;    
     try{
@@ -20,29 +21,30 @@
         
         
         
-        String existsSql = "select * from buddy where email=?";
+        String existsSql = "select * from BAB_PROFILE  where EMAIL_ID =?";
     	stmt = conn.prepareStatement(existsSql);
 	
-    	stmt.setString(1, email);
-		System.out.println("email "+email);
+    	stmt.setString(1, emailId);
+		System.out.println("email "+emailId);
 		
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
 
    	   	 session.invalidate();        
-   	   	 request.setAttribute("errorMessage", "Email Id Already Exists");
+   	   	 request.setAttribute("errorMessage", "Email Id Already Exists.");
+   	  	 request.setAttribute("errorColor", "red");
    	   	 RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
    	     rd.forward(request, response);
         	
         } else {
-        	String sql="insert into buddy(first_name, email, pass, contact,company_name) values (?,?,?,?,?)";    
+        	String sql="insert into BAB_PROFILE (EMAIL_ID,PASSWORD,NAME,CONTACT_NO,CURRENT_COMPANY_NAME) values (?,?,?,?,?)";    
 		    
     	    stmt=conn.prepareStatement(sql);
-    	    stmt.setString(1, name);
-    	    stmt.setString(2, email);
-    	    stmt.setString(3, pass);
-    	    stmt.setString(4, contact);
-    	    stmt.setString(5, company);
+    	    stmt.setString(1, emailId);
+    	    stmt.setString(2, password);
+    	    stmt.setString(3, name);
+    	    stmt.setString(4, contactNo);
+    	    stmt.setString(5, currentCompany);
     	    
     	    
     	    //ResultSet rs;
@@ -50,8 +52,9 @@
     	    if (i > 0) {
     	        //session.setAttribute("userid", user);
     	         
-    	         request.setAttribute("errorMessage", "Registration Successfull, Please enter your credentials to Login");
-    		   	 RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+    	         request.setAttribute("errorMessage", "Your Registartion Completed. Please Click here to <a href='login.jsp'>Login</a>");
+    	         request.setAttribute("errorColor", "green");
+    		   	 RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
     		     rd.forward(request, response);   
     	    } 
     	    else {   

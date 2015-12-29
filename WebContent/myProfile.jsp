@@ -41,24 +41,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							    {
 		 				%>			
 		 				 
-       					 <div class="row">
-            				<div class="form-actions floatRight">
-                				<font color="green">My Profile successfully updated</a></font>
-            					</div>
-        				</div>
-						<br>	      
+       					<div>
+		 					<center><h4><font color="green"><%=request.getAttribute("errorMessage") %></font></h4></center>
+		 				 </div>
+       					
 						<%
 							    }
 						%>
 					
 		<%if(buddy==null){ %>
+		
 		<div class="row">
-            <div class="form-group col-md-12">
-                <div class="col-md-9">
-                    <a href="login.jsp">Please Login to view your profile</a>
-                </div>
+            <div class="form-actions floatRight">
+            	<br><br>
+              	<a href="login.jsp">Please login to view this</a>
             </div>
-         </div>
+       </div>
+		
 		<%}else{
 			
 			
@@ -72,7 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    try{    //: Execute a query
 		        System.out.println("Creating statement...");
 		        
-		    	String sql = "select * from buddy where email=?";
+		    	String sql = "select * from BAB_PROFILE where email_id=?";
 		    	stmt = conn.prepareStatement(sql);
 		    	
 		    	stmt.setString(1, buddy.getEmailId());
@@ -82,9 +81,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        ResultSet rs = stmt.executeQuery();
 		        if (rs.next()) {
 		        	System.out.println("Success");
-		        	buddy.setBuddyFirstName(rs.getString("first_name"));
-		        	buddy.setCompanyName(rs.getString("company_name"));
-		        	buddy.setContactNumber(rs.getString("contact"));
+		        	buddy.setBuddyName(rs.getString("NAME"));
+		        	buddy.setContactNo(rs.getString("CONTACT_NO"));
+		        	buddy.setCurrentCompanyName(rs.getString("CURRENT_COMPNY_NAME"));
+		        	
 		            session.setAttribute("buddy", buddy);
 		            
 		        }
@@ -110,42 +110,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        }//end finally try
 		     }//end try
 		 
-
-			
-			
-			
-			%>
+		%>
+		
+		
 		 <form method="post" action="updateProfile.jsp">
 		
 		<div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="firstName">Email ID :</label>
+                <label class="col-md-3 control-lable" >Email ID :</label>
                 <div class="col-md-9">
-                    <input type="text" path="Username" id="Username" class="form-control input-sm" value="<%=buddy.getEmailId() %>" name="email" readonly="readonly"/>
+                    <input type="text" id="emailId" class="form-control input-sm" value="<%=buddy.getEmailId() %>" name="emailId" readonly="readonly"/>
                 </div>
             </div>
          </div>
           <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="firstName">Name :</label>
+                <label class="col-md-3 control-lable" >Name :</label>
                 <div class="col-md-9">
-                    <input type="text" path="Username" id="Username" class="form-control input-sm" value="<%=buddy.getBuddyFirstName()%>" name="name" required/>
+                    <input type="text"  id="name" class="form-control input-sm" value="<%=buddy.getBuddyName()%>" name="name" required/>
                 </div>
             </div>
          </div>
          <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="lastName">Current Company :</label>
+                <label class="col-md-3 control-lable" >Contact No :</label>
                 <div class="col-md-9">
-                    <input type="text" path="Password" id="Password" class="form-control input-sm" value="<%=buddy.getCompanyName()%>" name="company" required/>
+                    <input type="text" pattern= "[0-9]{10}"  id="contactNo" class="form-control input-sm" value="<%=buddy.getContactNo()%>" name="contactNo" required/>
                 </div>
             </div>
         </div>
 		<div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="lastName">Contact Number :</label>
+                <label class="col-md-3 control-lable" >Current Company :</label>
                 <div class="col-md-9">
-                    <input type="text" path="ConfirmPassword" id="ConfirmPassword" class="form-control input-sm" value="<%=buddy.getContactNumber()%>" name="contact" required/>
+                    <input type="text"  id="currentCompany" class="form-control input-sm" value="<%=buddy.getCurrentCompanyName() %>" name="currentCompanyName" required/>
                 </div>
             </div>
         </div>

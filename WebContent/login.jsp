@@ -54,21 +54,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="textbox-wrap">
                             <div class="input-group">
                                 <span class="input-group-addon "><i class="fa fa-user"></i></span>
-                                <input type="text" required="required" class="form-control" placeholder="Email ID" name="email">
+                                <input type="text" required="required" class="form-control" placeholder="Email ID" name="emailid">
                             </div>
                         </div>
                         <div class="textbox-wrap">
                             <div class="input-group">
                                 <span class="input-group-addon "><i class="fa fa-key"></i></span>
-                                <input type="password" required="required" class="form-control " placeholder="Password" name="pass">
+                                <input type="password" required="required" class="form-control " placeholder="Password" name="password">
                             </div>
                         </div>
                          <%
 		 					   if(null!=request.getAttribute("errorMessage"))
 							    {
 		 				%>
-		 						  <div" >
-		 						  <%=request.getAttribute("errorMessage") %>
+		 						  <div>
+		 						  <h4><font color="red"><%=request.getAttribute("errorMessage") %></font></h4>
 		 						  
 							      </div>
 						<%

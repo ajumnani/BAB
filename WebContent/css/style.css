@@ -126,11 +126,11 @@ body a{
     font-weight: 300;
     width:50%;
     margin-bottom:20px;
-}
-#search_form label {
+}#search_form label {
     position: relative;
     z-index: 1;
 }
+
 .contact-form label {
 	position: relative;
 	z-index: 1;

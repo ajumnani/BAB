@@ -2,58 +2,24 @@ package com.bab.dto;
 
 public class JobPost {
 	
-	private String jobPosterName;
-	private String jobID;
-	private String jobPosterEmail;
-	
+	private String jobId;
 	private String jobTitle;
 	private String jobDescription;
-	private String interviewDate;
-	private String companyName;
-	private String expLevel;
-	private String skills;
+	private String jobCompany;
 	private String jobLocation;
-	
-	
-	public String getJobLocation() {
-		return jobLocation;
-	}
-	public void setJobLocation(String jobLocation) {
-		this.jobLocation = jobLocation;
-	}
-	public String getSkills() {
-		return skills;
-	}
-	public void setSkills(String skills) {
-		this.skills = skills;
-	}
-	private String jobPostDate;
+	private String jobExp;
+	private String jobSkills;
+	private String jobOwnerEmailId;
+	private String createDate;
+	private String updateDate;
 	
 	
 	
-	public String getJobPostDate() {
-		return jobPostDate;
+	public String getJobId() {
+		return jobId;
 	}
-	public void setJobPostDate(String jobPostDate) {
-		this.jobPostDate = jobPostDate;
-	}
-	public String getJobID() {
-		return jobID;
-	}
-	public void setJobID(String jobID) {
-		this.jobID = jobID;
-	}
-	public String getJobPosterEmail() {
-		return jobPosterEmail;
-	}
-	public void setJobPosterEmail(String jobPosterEmail) {
-		this.jobPosterEmail = jobPosterEmail;
-	}
-	public String getJobPosterName() {
-		return jobPosterName;
-	}
-	public void setJobPosterName(String jobPosterName) {
-		this.jobPosterName = jobPosterName;
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
 	}
 	public String getJobTitle() {
 		return jobTitle;
@@ -67,24 +33,50 @@ public class JobPost {
 	public void setJobDescription(String jobDescription) {
 		this.jobDescription = jobDescription;
 	}
-	public String getInterviewDate() {
-		return interviewDate;
+	public String getJobCompany() {
+		return jobCompany;
 	}
-	public void setInterviewDate(String interviewDate) {
-		this.interviewDate = interviewDate;
+	public void setJobCompany(String jobCompany) {
+		this.jobCompany = jobCompany;
 	}
-	public String getCompanyName() {
-		return companyName;
+	public String getJobLocation() {
+		return jobLocation;
 	}
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setJobLocation(String jobLocation) {
+		this.jobLocation = jobLocation;
 	}
-	public String getExpLevel() {
-		return expLevel;
+	public String getJobExp() {
+		return jobExp;
 	}
-	public void setExpLevel(String expLevel) {
-		this.expLevel = expLevel;
+	public void setJobExp(String jobExp) {
+		this.jobExp = jobExp;
 	}
+	public String getJobSkills() {
+		return jobSkills;
+	}
+	public void setJobSkills(String jobSkills) {
+		this.jobSkills = jobSkills;
+	}
+	public String getJobOwnerEmailId() {
+		return jobOwnerEmailId;
+	}
+	public void setJobOwnerEmailId(String jobOwnerEmailId) {
+		this.jobOwnerEmailId = jobOwnerEmailId;
+	}
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
 	
+		
 	
 }
