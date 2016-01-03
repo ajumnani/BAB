@@ -45,8 +45,8 @@
 					
 					
 				<li><a href="viewAvailableJobs.jsp"> All Jobs </a></li>
-				<li><a href="viewMyJobs.jsp">My Applied/Posted Jobs</a></li>
 		        <li><a href="postNewJob.jsp">Post New Job</a></li>
+		        <li><a href="viewMyJobs.jsp">My Applied/Posted Jobs</a></li>
 				<li><a href="myNotification.jsp">My Notification</a></li>
 		   		<li><a href="myProfile.jsp">My Profile</a></li>
 			

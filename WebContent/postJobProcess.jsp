@@ -6,18 +6,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-        
-    String jtitle = request.getParameter("jtitle");
-    String jdesc = request.getParameter("jdesc");
-    String company = request.getParameter("company");
-    String exp = request.getParameter("exp");
-    String skills = request.getParameter("skills");
-    String location = request.getParameter("location");
+
+	Buddy buddy=new Buddy();
+	buddy=(Buddy)session.getAttribute("buddy");
+
+
+
+    String jobTitle = request.getParameter("jobTitle");
+    String jobDescription = request.getParameter("jobDescription");
+    String jobCompany = request.getParameter("jobCompany");
+    String jobLocation = request.getParameter("jobLocation");
+    String jobExp = request.getParameter("jobExp");
+    String jobSkills = request.getParameter("jobSkills");
+	String jobOwnerEmailId=buddy.getEmailId();    
+   
     
-    Buddy buddy=new Buddy();
-    buddy=(Buddy)session.getAttribute("buddy");
-    String jobPosterName=buddy.getBuddyFirstName();
-    String jobPosterEmail=buddy.getEmailId();
     Connection conn=null;
     PreparedStatement stmt=null;
 
@@ -25,16 +28,15 @@
     conn=db.getJNDIConnection();
     try{
         
-            String sql="insert into job_posts(job_id,job_poster_name, job_poster_email, job_tittle, job_description,job_company,job_exp_level,job_skills,job_location,flag) values (seq_jobid.NEXTVAL,?,?,?,?,?,?,?,?,'Y')";    
+            String sql="insert into bab_job_details values (seq_jobid.NEXTVAL,?,?,?,?,?,?,?,sysdate,sysdate,'A')";    
 		    stmt=conn.prepareStatement(sql);
-    	    stmt.setString(1, jobPosterName);
-    	    stmt.setString(2, jobPosterEmail);
-    	    stmt.setString(3, jtitle);
-    	    stmt.setString(4, jdesc);
-    	    stmt.setString(5, company);
-    	    stmt.setString(6, exp);
-    	    stmt.setString(7, skills);
-    	    stmt.setString(8, location);
+		    stmt.setString(1, jobTitle);
+    	   	stmt.setString(2, jobDescription);
+    	    stmt.setString(3, jobCompany);
+    	    stmt.setString(4, jobLocation);
+    	    stmt.setString(5, jobExp);
+    	    stmt.setString(6, jobSkills);
+    	    stmt.setString(7, jobOwnerEmailId);
     	    
     	    
     	    
@@ -43,14 +45,16 @@
     	    if (i > 0) {
     	        //session.setAttribute("userid", user);
     	         
-    	         request.setAttribute("errorMessage", "Job Posted Successfully");
-    		   	 RequestDispatcher rd = request.getRequestDispatcher("/viewAvailableJobs.jsp");
+    	         request.setAttribute("errorMessage", "Your New Job added successfully..");
+    	         request.setAttribute("errorColor", "green");
+    		   	 RequestDispatcher rd = request.getRequestDispatcher("/viewMyJobs.jsp");
     		     rd.forward(request, response);   
     	    } 
     	    else {   
 
     	   	   	 request.setAttribute("errorMessage", "Some Technical Problem occured,please retry");
-    	   	   	 RequestDispatcher rd = request.getRequestDispatcher("/viewAvailableJobs.jsp");
+    	   	 	 request.setAttribute("errorColor", "red");
+    	   	   	 RequestDispatcher rd = request.getRequestDispatcher("/postNewJob.jsp");
     	   	     rd.forward(request, response);    	    	
     	    }   
         

@@ -34,6 +34,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	   <div class="form-container">
         <h2>Post New Job</h2>
         
+       	<%
+			if (null != request.getAttribute("errorMessage")) {
+		%>
+			<div class="row">
+					<div class="form-actions floatRight">
+						<font color="<%=request.getAttribute("errorColor") %>"><%=request.getAttribute("errorMessage")%></a></font>
+					</div>
+			</div>
+			<br>
+
+		<%
+			}
+		%>
+        
+        
+        
         
         <%if(buddy!=null){ %>
         <form method="post" action="postJobProcess.jsp">
@@ -43,7 +59,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="firstName">Job Title:</label>
                 <div class="col-md-9">
-                    <input type="text" placeholder="Enter your job title ..." path="Username" id="Username" class="form-control input-sm" name="jtitle" required/>
+                    <input type="text" placeholder="Enter your job title ..." path="Username" id="Username" class="form-control input-sm" name="jobTitle" required/>
                 </div>
             </div>
          </div>
@@ -51,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="firstName">Job Description :</label>
                 <div class="col-md-9">
-                    <input type="textarea rows="4" placeholder="Enter your job description ..." cols="50" path="Username" id="Username" class="form-control input-sm"  name="jdesc" required/>
+                    <input type="textarea rows="4" placeholder="Enter your job description ..." cols="50" path="Username" id="Username" class="form-control input-sm"  name="jobDescription" required/>
                 </div>
             </div>
          </div>
@@ -59,7 +75,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="lastName">Company :</label>
                 <div class="col-md-9">
-                    <input type="text" placeholder="Enter company name ..." path="Password" id="Password" class="form-control input-sm"  name="company" required/>
+                    <input type="text" placeholder="Enter company name ..." path="Password" id="Password" class="form-control input-sm"  name="jobCompany" required/>
                 </div>
             </div>
         </div>
@@ -68,7 +84,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="lastName">Job Location :</label>
                 <div class="col-md-9">
-                    <input type="text" placeholder="Enter job location ..." path=password id="Password" class="form-control input-sm"  name="location" required/>
+                    <input type="text" placeholder="Enter job location ..." path=password id="Password" class="form-control input-sm"  name="jobLocation" required/>
                 </div>
             </div>
         </div>
@@ -77,7 +93,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="lastName">Experience require :</label>
                 <div class="col-md-9">
-                    <input type="text" placeholder="Enter experience required for this job ..." path="Password" id="Password" class="form-control input-sm"  name="exp" required/>
+                    <input type="text" placeholder="Enter experience required for this job ..." path="Password" id="Password" class="form-control input-sm"  name="jobExp" required/>
                 </div>
             </div>
         </div>
@@ -85,7 +101,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="lastName">Skills :</label>
                 <div class="col-md-9">
-                    <input type="text" placeholder="Enter skills required for this job ..." path="ConfirmPassword" id="ConfirmPassword" class="form-control input-sm" name="skills" required/>
+                    <input type="text" placeholder="Enter skills required for this job ..." path="ConfirmPassword" id="ConfirmPassword" class="form-control input-sm" name="jobSkills" required/>
                 </div>
             </div>
         </div>

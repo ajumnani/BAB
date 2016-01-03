@@ -12,6 +12,9 @@ public class JobPost {
 	private String jobOwnerEmailId;
 	private String createDate;
 	private String updateDate;
+	private String postDay;
+	private String postMonthYear;
+	
 	
 	
 	
@@ -75,6 +78,19 @@ public class JobPost {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
+	public String getPostDay() {
+		return postDay;
+	}
+	public void setPostDay(String postDay) {
+		this.postDay = postDay;
+	}
+	public String getPostMonthYear() {
+		return postMonthYear;
+	}
+	public void setPostMonthYear(String postMonthYear) {
+		this.postMonthYear = postMonthYear;
+	}
+
 
 	
 		

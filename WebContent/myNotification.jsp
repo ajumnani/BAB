@@ -65,21 +65,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   		
 		   		if(buddy!=null){
 		   		//My Applied Jobs STarts here
-		        String sqlMyAppliedJobs = "select * from job_posts a,applied_jobs b where a.job_id=b.job_id and b.job_poster_email=? order by a.job_post_date desc";
-		    	stmt = conn.prepareStatement(sqlMyAppliedJobs);
+		        String sqlMyNotification = "select a.job_id,a.job_title,a.job_description,a.job_company,a.job_location,a.job_exp,a.job_skills,"+
+		        		" c.name Applied_buddy_name , b.APPLIED_BUDDY_EMAIL_ID,b.APPLIED_BUDDY_CONTACT_NO,to_char(b.create_Date,'DD-Mon-YYYY') Applied_on  "+
+		        		" from bab_job_details a, bab_applied_job_details b, bab_profile c "+
+		        		" where a.job_id = b.job_id and "+
+		        		" a.job_owner_email_id = ? and "+
+		        		" c.email_id = a.job_owner_email_id";
+		   		
+		   		
+		   		stmt = conn.prepareStatement(sqlMyNotification);
 		    	stmt.setString(1, buddy.getEmailId());
 				
 				rs = stmt.executeQuery();
 				System.out.println("Success 1");
+				
+				System.out.println(sqlMyNotification);
+		    	
 				while (rs.next()) {
 		        	System.out.println("Success 2");
 		        	MyNotifications myNotiObj=new MyNotifications();
-		        	myNotiObj.setJobTitle(rs.getString("job_tittle"));
-		        	myNotiObj.setJobAppliedDate(rs.getString("job_applied_date"));
-		        	myNotiObj.setJobApplierName(rs.getString("job_applier_name"));
-		        	myNotiObj.setJobApplierContact(rs.getString("job_applier_contact"));
-		        	myNotiObj.setJobApplierEmail(rs.getString("applier_buddy_email"));
-		        	myNotiObj.setJobLocation(rs.getString("job_location"));
+		        
+		        	myNotiObj.setJobId(rs.getString("JOB_ID"));
+		        	myNotiObj.setJobTitle(rs.getString("JOB_TITLE"));
+		        	myNotiObj.setJobDescription(rs.getString("JOB_DESCRIPTION"));
+		        	myNotiObj.setJobCompany(rs.getString("JOB_COMPANY"));
+		        	myNotiObj.setJobLocation(rs.getString("JOB_LOCATION"));
+		        	myNotiObj.setJobExp(rs.getString("JOB_EXP"));
+		        	myNotiObj.setJobSkills(rs.getString("JOB_SKILLS"));
+		        	myNotiObj.setAppliedBuddyName(rs.getString("APPLIED_BUDDY_NAME"));
+		        	myNotiObj.setAppliedBuddyEmailId(rs.getString("APPLIED_BUDDY_EMAIL_ID"));
+		        	myNotiObj.setAppliedBuddyConactNo(rs.getString("APPLIED_BUDDY_CONTACT_NO"));
+		        	myNotiObj.setAppliedOn(rs.getString("APPLIED_ON"));
+		        	
 		        	myNotifications.add(myNotiObj);
 		        }
 		        }
@@ -123,10 +140,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			    
 			    <div class="col-sm-9">
 			       <div class="location_box1">
-			    	 <h6><a href=""><%=myNotify.getJobTitle() %> </a><span class="m_1">Applied On <%=myNotify.getJobAppliedDate() %></span></h6>
-					 <p><span class="m_2">Applied Budy Name : </span><%=myNotify.getJobApplierName() %></p>
-			    	 <p><span class="m_2">Apply Buddy Email ID : </span><%=myNotify.getJobApplierEmail() %></p>
-					 <p><span class="m_2">Apply Buddy Contact No : </span><%=myNotify.getJobApplierContact()%></p>
+			    	 <h6><a href=""><%=myNotify.getJobTitle() %> </a><span class="m_1">Applied On <%=myNotify.getAppliedOn() %></span></h6>
+			    	 <p><span class="m_2">Job Description : </span><%=myNotify.getJobDescription() %></p>
+			    	 <p><span class="m_2">Job Company : </span><%=myNotify.getJobCompany() %></p>
+			    	 <p><span class="m_2">Job Location : </span><%=myNotify.getJobLocation() %></p>
+			    	 <p><span class="m_2">Job Experience : </span><%=myNotify.getJobExp() %></p>
+			    	 <p><span class="m_2">Job Skills : </span><%=myNotify.getJobSkills() %></p>
+			    	 <p><span class="m_2">Buddy Name who applied : </span><%=myNotify.getAppliedBuddyName() %></p>
+			    	 <p><span class="m_2">Buddy's Email ID : </span><%=myNotify.getAppliedBuddyEmailId() %></p>
+					 <p><span class="m_2">Buddy's Contact No : </span><%=myNotify.getAppliedBuddyConactNo() %></p>
 			    	 
 				   </div>
 			    </div>
@@ -136,7 +158,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			 <%}
 			 }else{ %>
 			
-			<a href="login.jsp">Please login to view this</a>
+			<div class="row">
+            		<div class="form-actions floatRight">
+            			<br><br>
+               		 	<a href="login.jsp">Please login to view this</a>
+            		</div>
+            		<br>
+            		<br>
+        	</div>
 			
 			<%} %>
 			 

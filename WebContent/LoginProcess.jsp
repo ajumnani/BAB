@@ -16,7 +16,7 @@
     try{    //: Execute a query
         System.out.println("Creating statement...");
         
-    	String sql = "SELECT * FROM  BAB_PROFILE where EMAIL_ID=? and PASSWORD=?";
+    	String sql = "SELECT * FROM  BAB_PROFILE where upper(EMAIL_ID) = upper(?) and PASSWORD=?";
     	stmt = conn.prepareStatement(sql);
 	
     	stmt.setString(1, email);
@@ -35,7 +35,7 @@
         	buddy.setCurrentCompanyName(rs.getString("CURRENT_COMPANY_NAME"));
         	
             session.setAttribute("buddy", buddy);
-            response.sendRedirect("register.jsp");
+            response.sendRedirect("viewAvailableJobs.jsp");
         } else {
         	 session.invalidate();        
         	 request.setAttribute("errorMessage", "Invalid Username or Password");

@@ -51,19 +51,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   
 		<div id="myTabContent" class="tab-content">
 		  
-		  <%
-		 					   if(null!=request.getAttribute("errorMessage"))
-							    {
-		 				%>			
-		 				 <center>
-		 				 <div class="row" style="background-color: #33FF00; padding-bottom:2%; width:70%">
-       					 <center><p style="color: white; padding-top: 2%"><%=request.getAttribute("errorMessage") %></p></center>
-						</div>
-						</center>
-							      
-						<%
-							    }
-						%>
+				<%
+					if (null != request.getAttribute("errorMessage")) {
+				%>
+				<br>
+				<br>
+				<div class="row">
+					<div class="form-actions floatRight">
+						<font color="<%=request.getAttribute("errorColor") %>"><%=request.getAttribute("errorMessage")%></a></font>
+					</div>
+				</div>
+				<br>
+
+				<%
+					}
+				%>
+		
+		
+		
+		
 		       
 		  <%
 		   
@@ -81,7 +87,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   		
 		   		if(buddy!=null){
 		   		//My Applied Jobs STarts here
-		        String sqlMyAppliedJobs = "select * from job_posts a,applied_jobs b where a.job_id=b.job_id and b.applier_buddy_email=? order by a.job_post_date desc";
+		        String sqlMyAppliedJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,TO_CHAR(CREATE_DATE,'DD') POST_DAY,TO_CHAR(CREATE_DATE,'Mon') POST_MONTH_YEAR from bab_job_details a where job_id in (select job_id from bab_applied_job_details where applied_buddy_email_id = ? ) AND FLAG = 'A' order by update_Date desc";
 		    	stmt = conn.prepareStatement(sqlMyAppliedJobs);
 		    	stmt.setString(1, buddy.getEmailId());
 				
@@ -90,15 +96,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				while (rs.next()) {
 		        	System.out.println("Success 2");
 		        	JobPost jobPost=new JobPost();
-		        	jobPost.setCompanyName(rs.getString("job_company"));
-		        	jobPost.setExpLevel(rs.getString("job_exp_level"));
+		        	
+		        	jobPost.setJobId(rs.getString("job_id"));
+		        	jobPost.setJobTitle(rs.getString("job_title"));
 		        	jobPost.setJobDescription(rs.getString("job_description"));
-		        	jobPost.setJobID(rs.getString("job_id"));
-		        	jobPost.setJobPosterEmail(rs.getString("job_poster_email"));
-		        	jobPost.setJobPosterName(rs.getString("job_poster_name"));
-		        	jobPost.setJobTitle(rs.getString("job_tittle"));
-		        	jobPost.setJobPostDate(rs.getString("job_post_date"));
-		        	jobPost.setSkills(rs.getString("job_skills"));
+		        	jobPost.setJobCompany(rs.getString("job_company"));
+		        	jobPost.setJobLocation(rs.getString("job_location"));
+		        	jobPost.setJobExp(rs.getString("job_exp"));
+		        	jobPost.setJobSkills(rs.getString("job_skills"));
+					jobPost.setJobOwnerEmailId(rs.getString("job_owner_email_id"));
+					jobPost.setCreateDate(rs.getString("create_date"));
+					jobPost.setUpdateDate(rs.getString("update_date"));
+					jobPost.setPostDay(rs.getString("POST_DAY"));
+					jobPost.setPostMonthYear(rs.getString("POST_MONTH_YEAR"));
+				
 					myAppliedJobs.add(jobPost);
 		        }
 		        }
@@ -106,7 +117,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   		
 		   		if(buddy!=null){
 		   		//My Posted Jobs Starts here
-		        String sqlMyPostedJobs = "select * from job_posts where job_poster_email=? and flag='Y' order by job_post_date desc";
+		        String sqlMyPostedJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,TO_CHAR(CREATE_DATE,'DD') POST_DAY,TO_CHAR(CREATE_DATE,'Mon') POST_MONTH_YEAR from bab_job_details a where job_owner_email_id = ? and flag = 'A' order by update_Date desc";
 				
 		    	stmt = conn.prepareStatement(sqlMyPostedJobs);
 				stmt.setString(1, buddy.getEmailId());
@@ -114,16 +125,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    	rs = stmt.executeQuery();
 		        while (rs.next()) {System.out.println("Success 4");
 	        	JobPost jobPost=new JobPost();
-	        	jobPost.setCompanyName(rs.getString("job_company"));
-	        	jobPost.setExpLevel(rs.getString("job_exp_level"));
+	        
+	        	jobPost.setJobId(rs.getString("job_id"));
+	        	jobPost.setJobTitle(rs.getString("job_title"));
 	        	jobPost.setJobDescription(rs.getString("job_description"));
-	        	jobPost.setJobID(rs.getString("job_id"));
-	        	jobPost.setJobPosterEmail(rs.getString("job_poster_email"));
-	        	jobPost.setJobPosterName(rs.getString("job_poster_name"));
-	        	jobPost.setJobTitle(rs.getString("job_tittle"));
-	        	jobPost.setSkills(rs.getString("job_skills"));
-	        	jobPost.setJobPostDate(rs.getString("job_post_date"));
-	 
+	        	jobPost.setJobCompany(rs.getString("job_company"));
+	        	jobPost.setJobLocation(rs.getString("job_location"));
+	        	jobPost.setJobExp(rs.getString("job_exp"));
+	        	jobPost.setJobSkills(rs.getString("job_skills"));
+				jobPost.setJobOwnerEmailId(rs.getString("job_owner_email_id"));
+				jobPost.setCreateDate(rs.getString("create_date"));
+				jobPost.setUpdateDate(rs.getString("update_date"));
+				jobPost.setPostDay(rs.getString("POST_DAY"));
+				jobPost.setPostMonthYear(rs.getString("POST_MONTH_YEAR"));
+			 
 				myPostedJobs.add(jobPost);
 		        }
 		        }
@@ -169,7 +184,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			    <div class="jobs-item with-thumb">
 				    
 				    <div class="jobs_right">
-						<div class="date">21<span>Jan</span></div>
+						<div class="date"><%=jobPost.getPostDay()  %><span><%=jobPost.getPostMonthYear() %></span></div>
 						<div class="date_desc"><h6 class="title"><a href="jobs_single.html"><%=jobPost.getJobTitle() %></a></h6>
 						<span class="meta"><%=jobPost.getJobLocation()%></span>
 						  
@@ -177,10 +192,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="clearfix"> </div>
                         
 						<p class="description">
-						Job Description : <%=jobPost.getJobDescription() %>
-						Company : <%=jobPost.getCompanyName()%><br>
-						Experience require : <%=jobPost.getExpLevel()%> <br>
-						Skills : <%=jobPost.getSkills() %> <br>
+						Job Description : <%=jobPost.getJobDescription() %> <br>
+						Company : <%=jobPost.getJobCompany() %><br>
+						Experience require : <%=jobPost.getJobExp()  %> <br>
+						Skills : <%=jobPost.getJobSkills() %> <br>
 												  
 							
                     </div>
@@ -217,7 +232,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			    <div class="jobs-item with-thumb">
 				    <form method="post" action="deleteJob.jsp">
 				    <div class="jobs_right">
-						<div class="date">21<span>Dec</span></div>
+						<div class="date"><%=jobPost.getPostDay()  %><span><%=jobPost.getPostMonthYear() %></span></div>
 						<div class="date_desc"><h6 class="title"><a href="jobs_single.html"><%=jobPost.getJobTitle() %></a></h6>
 						<span class="meta"><%=jobPost.getJobLocation()%></span>
 						  
@@ -225,17 +240,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="clearfix"> </div>
                         
 						<p class="description">
-						Job Description : <%=jobPost.getJobDescription() %>
-						Company : <%=jobPost.getCompanyName()%><br>
-						Experience require : <%=jobPost.getExpLevel()%> <br>
-						Skills : <%=jobPost.getSkills() %> <br>
+						Job Description : <%=jobPost.getJobDescription() %> <br>
+						Company : <%=jobPost.getJobCompany() %><br>
+						Experience require : <%=jobPost.getJobExp() %> <br>
+						Skills : <%=jobPost.getJobSkills() %> <br>
 						
                     </div>
 					<div class="clearfix"> </div>
-					<input type="hidden" name="jobId" value="<%=jobPost.getJobID() %>" >	
-					<input type="hidden" name="jobPosterEmail" value="<%=jobPost.getJobPosterEmail() %>" >	
+					<input type="hidden" name="jobId" value="<%=jobPost.getJobId() %>" >	
+					<input type="hidden" name="jobOwnerEmailId" value="<%=jobPost.getJobOwnerEmailId() %>" >	
 					
-					<input type="submit" value="Delete Job" class="btn btn-primary btn-sm">	
+					 <input type="submit" value="I Got My Buddy for this Job. Deactivate this Job" class="btn btn-primary btn-sm"> 	
 					</form>
 				</div>
 			 </div>

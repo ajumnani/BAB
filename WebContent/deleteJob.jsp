@@ -8,7 +8,9 @@
 <%
         
     String jobId = request.getParameter("jobId");
-    String jobPosterEmail = request.getParameter("jobPosterEmail");
+
+	System.out.println("JobId"+jobId);
+	
     Connection conn=null;
     PreparedStatement stmt=null;    
     try{
@@ -17,21 +19,18 @@
         Buddy buddy=(Buddy)session.getAttribute("buddy");
         	if(buddy!=null){
           	
-    	    
-		   
-    	    if(jobPosterEmail.equalsIgnoreCase(buddy.getEmailId())){
-			String sql="UPDATE job_posts SET flag = ? WHERE job_poster_email = ? and job_id=?";
+    	   	String sql="UPDATE BAB_JOB_DETAILS SET flag = 'D' , update_Date = sysdate WHERE  job_id= ? ";
           	stmt=conn.prepareStatement(sql);
-    	    stmt.setString(1, "N");
-    	    stmt.setString(2,buddy.getEmailId() );
-    	    stmt.setString(3,jobId );
+    	    stmt.setString(1, jobId );
     	    
     	    int i=stmt.executeUpdate();
     	     	    
     	    if (i > 0) {
     	        //session.setAttribute("userid", user);
     	         
-    	         request.setAttribute("errorMessage", "Job deleted Successfull");
+    	         request.setAttribute("errorMessage", "Your Job Deleted...");
+    	         request.setAttribute("errorColor", "green");
+    	         
     		   	 RequestDispatcher rd = request.getRequestDispatcher("/viewMyJobs.jsp");
     		     rd.forward(request, response);   
     	    } 
@@ -39,14 +38,12 @@
 
     	   	   	      
     	   	   	 request.setAttribute("errorMessage", "Some Technical Problem occured,please retry");
+    	   	 	 request.setAttribute("errorColor", "red");
+ 	         
     	   	   	 RequestDispatcher rd = request.getRequestDispatcher("/viewMyJobs.jsp");
     	   	     rd.forward(request, response);    	    	
     	    }   
-        	}else{
-        	 request.setAttribute("errorMessage", "You tried to delete job which was not posted by you");
-   	   	   	 RequestDispatcher rd = request.getRequestDispatcher("/viewMyJobs.jsp");
-   	   	     rd.forward(request, response); 
-        	}
+        	
     	    
         	}
         	else{

@@ -13,7 +13,6 @@ create table BAB_PROFILE
 alter table BAB_PROFILE
   add primary key (EMAIL_ID) ;
   
-  
   -- Create table
 create table BAB_JOB_DETAILS
 (
@@ -26,8 +25,26 @@ create table BAB_JOB_DETAILS
   job_skills         VARCHAR2(100),
   job_owner_email_id VARCHAR2(100),
   create_date        DATE default sysdate,
-  update_date        DATE default sysdate
-);
+  update_date        DATE default sysdate,
+  flag               VARCHAR2(10) default 'A'
+) ;
 -- Create/Recreate primary, unique and foreign key constraints 
 alter table BAB_JOB_DETAILS
-  add primary key (JOB_ID) ;
+  add primary key (JOB_ID);
+  
+  
+  
+  
+  -- Create table
+create table BAB_APPLIED_JOB_DETAILS
+(
+  job_id                   NUMBER not null,
+  applied_buddy_email_id   VARCHAR2(1000) not null,
+  applied_buddy_contact_no NUMBER,
+  create_date              DATE default sysdate,
+  update_date              DATE default sysdate
+);
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table BAB_APPLIED_JOB_DETAILS
+  add constraint PK_JOB_APPLIED primary key (JOB_ID, APPLIED_BUDDY_EMAIL_ID);
+  

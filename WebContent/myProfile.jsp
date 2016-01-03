@@ -71,19 +71,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    try{    //: Execute a query
 		        System.out.println("Creating statement...");
 		        
-		    	String sql = "select * from BAB_PROFILE where email_id=?";
+		    	String sql = "select * from BAB_PROFILE where upper(email_id) = upper(?) ";
 		    	stmt = conn.prepareStatement(sql);
 		    	
 		    	stmt.setString(1, buddy.getEmailId());
-			
-		    	
-				
-		        ResultSet rs = stmt.executeQuery();
-		        if (rs.next()) {
+				ResultSet rs = stmt.executeQuery();
+		        
+				if (rs.next()) {
 		        	System.out.println("Success");
 		        	buddy.setBuddyName(rs.getString("NAME"));
 		        	buddy.setContactNo(rs.getString("CONTACT_NO"));
-		        	buddy.setCurrentCompanyName(rs.getString("CURRENT_COMPNY_NAME"));
+		        	buddy.setCurrentCompanyName(rs.getString("CURRENT_COMPANY_NAME"));
 		        	
 		            session.setAttribute("buddy", buddy);
 		            
@@ -135,7 +133,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" >Contact No :</label>
                 <div class="col-md-9">
-                    <input type="text" pattern= "[0-9]{10}"  id="contactNo" class="form-control input-sm" value="<%=buddy.getContactNo()%>" name="contactNo" required/>
+                    <input type="text" pattern= "[0-9]{10}"  id="contactNo" class="form-control input-sm" value="<%=buddy.getContactNo()%>" name="contactNo" />
                 </div>
             </div>
         </div>
@@ -143,7 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" >Current Company :</label>
                 <div class="col-md-9">
-                    <input type="text"  id="currentCompany" class="form-control input-sm" value="<%=buddy.getCurrentCompanyName() %>" name="currentCompanyName" required/>
+                    <input type="text"  id="currentCompany" class="form-control input-sm" value="<%=buddy.getCurrentCompanyName() %>" name="currentCompanyName" />
                 </div>
             </div>
         </div>

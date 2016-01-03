@@ -68,7 +68,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				%>
 				<div class="row">
 					<div class="form-actions floatRight">
-						<font color="green">Your New Job Successfully added..</a></font>
+						<font color="<%=request.getAttribute("errorColor") %>"><%=request.getAttribute("errorMessage")%></a></font>
 					</div>
 				</div>
 				<br>
@@ -93,8 +93,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						System.out.println("Creating statement...");
 						conn = db.getJNDIConnection();
 						//All Jobs Starts here
-						String sqlAllJobs = "select * from bab_job_details order by update_Date desc";
+						if(buddy!=null){
+						String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,TO_CHAR(CREATE_DATE,'DD') POST_DAY,TO_CHAR(CREATE_DATE,'Mon') POST_MONTH_YEAR from bab_job_details where job_owner_email_id != ? and job_id not in (select job_id from bab_applied_job_details where applied_buddy_email_id = ? ) AND FLAG = 'A' order by create_Date desc";
 						stmt = conn.prepareStatement(sqlAllJobs);
+						stmt.setString(1, buddy.getEmailId());
+						stmt.setString(2, buddy.getEmailId());
+						}
+						else{
+							String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,TO_CHAR(CREATE_DATE,'DD') POST_DAY,TO_CHAR(CREATE_DATE,'Mon') POST_MONTH_YEAR from bab_job_details order by create_Date desc";	
+							stmt = conn.prepareStatement(sqlAllJobs);
+						}
+						
+						
+						
 						System.out.println("Creating statement... 2");
 						rs = stmt.executeQuery();
 						while (rs.next()) {
@@ -107,10 +118,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							jobPost.setJobLocation(rs.getString("JOB_LOCATION"));
 							jobPost.setJobExp(rs.getString("JOB_EXP"));
 							jobPost.setJobSkills(rs.getString("JOB_SKILLS"));
-							jobPost.setJobOwnerEmailId(rs
-									.getString("JOB_OWNER_EMAIL_ID"));
+							jobPost.setJobOwnerEmailId(rs.getString("JOB_OWNER_EMAIL_ID"));
 							jobPost.setCreateDate(rs.getString("CREATE_DATE"));
 							jobPost.setUpdateDate(rs.getString("UPDATE_DATE"));
+							jobPost.setPostDay(rs.getString("POST_DAY"));
+							jobPost.setPostMonthYear(rs.getString("POST_MONTH_YEAR"));
+							
 
 							allJobs.add(jobPost);
 
@@ -147,8 +160,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				%>
 				<div class="jobs_follow jobs-single-item">
 					<div class="thumb_right">
-						<div class="date"><%=jobPost.getCreateDate()%>
-							<span><%=jobPost.getCreateDate()%></span>
+						<br>
+						<div class="date"><%=jobPost.getPostDay() %>
+							<span><%=jobPost.getPostMonthYear()  %></span>
 						</div>
 						<h6 class="title"><%=jobPost.getJobTitle()%></h6>
 						<span class="meta"><%=jobPost.getJobLocation()%></span> <br>
@@ -160,10 +174,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<%=jobPost.getJobCompany()%>
 						</p>
 						<p>
-							Exprience require :<%=jobPost.getJobExp()%>
+							Exprience require :
+							<%=jobPost.getJobExp()%>
 						</p>
 						<p>
-							Skills :<%=jobPost.getJobSkills()%></p>
+							Skills :
+							<%=jobPost.getJobSkills()%></p>
 
 
 						<hr>
@@ -176,7 +192,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<%
 							}
 						%>
-
+						<br>
+						<br>
 						</div>
 
 						<!-- Modal If -->
@@ -216,25 +233,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<span aria-hidden="true">×</span>
 										</button>
 										<h4 class="modal-title" id="myModalLabel">Below details
-											will be sent to Buddy who has posted this Job.</h4>
+											will be sent to Buddy who has posted this Job. So that Job Owner Buddy can contact you.</h4>
 									</div>
 									<div class="modal-body">
 										<form method="Post" action="applyJob.jsp">
-											Name : <input type="text" path="name" id="name"
+											Name : <input type="text" path="name" id="appliedBuddyName"
 												class="form-control input-sm"
-												value="<%=buddy.getBuddyName()%>" disabled name="name" />
-											Email ID : <input type="text" path="email" id="email"
+												value="<%=buddy.getBuddyName()%>"  name="appliedBuddyName" disabled/>
+											Email ID : <input type="text" path="email" id="appliedBuddyEmailId"
 												class="form-control input-sm"
-												value="<%=buddy.getEmailId()%>" disabled name="email" />
+												value="<%=buddy.getEmailId()%>" name="appliedBuddyEmailId" disabled />
 
-											Contact No : <input type="text" path="contact" id="contact"
+											Contact No : <input type="text" path="contact" id="appliedBuddyContactNo"
 												class="form-control input-sm"
-												value="<%=buddy.getContactNo()%>" name="contact" />
+												value="<%=buddy.getContactNo()%>" name="appliedBuddyContactNo" />
 											<%
-												String jobId = request.getParameter("job_id");
+												String jobId = request.getParameter("JOB_ID");
+												String jobOwnerEmailId = request.getParameter("JOB_OWNER_EMAIL_ID");
+												
+												
+											
+											
 											%>
-											<input type="hidden" name="jobId" id="jobId" value="" /> <input
-												type="hidden" name="posterEmail" id="posterEmail" value="" />
+											<input type="hidden" name="jobId" id="jobId" value="" />
+											<input type="hidden" name="jobOwnerEmailId" id="jobOwnerEmailId" value="" />
+											
 
 											<br> <input type="submit" value="Apply Job"
 												class="btn btn-primary btn-sm">
@@ -249,11 +272,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 
 						</div>
-
+						<div class="clearfix"></div>
+						
 					</div>
+					<div class="clearfix"></div>
 				</div>
 
 
 			</div>
+</div>
+
+
+
 </body>
 </html>
+
+
