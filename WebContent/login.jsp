@@ -81,7 +81,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                      
                      <div class="forgot">
 						  <div class="login-para">
-				 			<p><a href="">Forgot Password? (Please email to us from your register email id) </a></p>
+				 			<p><a href="forgotpwd.jsp">Forgot Password?</a></p>
 				 		 </div>
 					     <div class="clearfix"> </div>
 			        </div>
