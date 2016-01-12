@@ -94,13 +94,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						conn = db.getJNDIConnection();
 						//All Jobs Starts here
 						if(buddy!=null){
-						String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,TO_CHAR(CREATE_DATE,'DD') POST_DAY,TO_CHAR(CREATE_DATE,'Mon') POST_MONTH_YEAR from bab_job_details where job_owner_email_id != ? and job_id not in (select job_id from bab_applied_job_details where applied_buddy_email_id = ? ) AND FLAG = 'A' order by create_Date desc";
+						String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'%d') POST_DAY,DATE_FORMAT(CREATE_DATE,'%b') POST_MONTH_YEAR from BAB_JOB_DETAILS where job_owner_email_id != ? and job_id not in (select job_id from BAB_APPLIED_JOB_DETAILS where applied_buddy_email_id = ? ) AND FLAG = 'A' order by create_Date desc";
 						stmt = conn.prepareStatement(sqlAllJobs);
 						stmt.setString(1, buddy.getEmailId());
 						stmt.setString(2, buddy.getEmailId());
 						}
 						else{
-							String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,TO_CHAR(CREATE_DATE,'DD') POST_DAY,TO_CHAR(CREATE_DATE,'Mon') POST_MONTH_YEAR from bab_job_details order by create_Date desc";	
+							String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'%d') POST_DAY,DATE_FORMAT(CREATE_DATE,'%b') POST_MONTH_YEAR from BAB_JOB_DETAILS where FLAG = 'A' order by create_Date desc";	
 							stmt = conn.prepareStatement(sqlAllJobs);
 						}
 						

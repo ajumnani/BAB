@@ -18,7 +18,7 @@ public class DBConnecction {
 	
 	  /** Uses JNDI and Datasource (preferred style).   */
 	 public Connection getJNDIConnection(){
-	    String DATASOURCE_CONTEXT = "java:jboss/datasources/babds";
+	    String DATASOURCE_CONTEXT = "java:jboss/datasources/babDSMYSQL";
 	    
 	    Connection result = null;
 	    try {

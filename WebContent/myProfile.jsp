@@ -155,6 +155,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
         </div>
         
+        <div class="row">
+            <a href="ChangePwd.jsp">Change Password</a>
+        </div>
+        
     </form>
     <%} %>
     </div>
@@ -163,8 +167,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 
-	<%@ include file="footer.jsp" %>
-
+	<%-- <%@ include file="footer.jsp" %>
+ --%>
 
 
 

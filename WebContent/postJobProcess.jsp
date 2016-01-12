@@ -28,7 +28,7 @@
     conn=db.getJNDIConnection();
     try{
         
-            String sql="insert into bab_job_details values (seq_jobid.NEXTVAL,?,?,?,?,?,?,?,sysdate,sysdate,'A')";    
+            String sql="insert into BAB_JOB_DETAILS(job_title,job_description,job_company,job_location,job_exp,job_skills,job_owner_email_id,create_date,update_date,flag) values (?,?,?,?,?,?,?,sysdate(),sysdate(),'A')";    
 		    stmt=conn.prepareStatement(sql);
 		    stmt.setString(1, jobTitle);
     	   	stmt.setString(2, jobDescription);

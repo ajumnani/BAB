@@ -65,12 +65,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   		
 		   		if(buddy!=null){
 		   		//My Applied Jobs STarts here
-		        String sqlMyNotification = "select a.job_id,a.job_title,a.job_description,a.job_company,a.job_location,a.job_exp,a.job_skills,"+
-		        		" c.name Applied_buddy_name , b.APPLIED_BUDDY_EMAIL_ID,b.APPLIED_BUDDY_CONTACT_NO,to_char(b.create_Date,'DD-Mon-YYYY') Applied_on  "+
-		        		" from bab_job_details a, bab_applied_job_details b, bab_profile c "+
-		        		" where a.job_id = b.job_id and "+
-		        		" a.job_owner_email_id = ? and "+
-		        		" c.email_id = a.job_owner_email_id";
+		        String sqlMyNotification = "select a.job_id JOB_ID,a.job_title JOB_TITLE,a.job_description JOB_DESCRIPTION,a.job_company JOB_COMPANY,a.job_location JOB_LOCATION,a.job_exp JOB_EXP,a.job_skills JOB_SKILLS,"+
+		        		 "c.name APPLIED_BUDDY_NAME,b.APPLIED_BUDDY_EMAIL_ID APPLIED_BUDDY_EMAIL_ID,b.APPLIED_BUDDY_CONTACT_NO APPLIED_BUDDY_CONTACT_NO,DATE_FORMAT(b.create_Date,'%d-%b-%Y') APPLIED_ON "+  
+		        		 "from BAB_JOB_DETAILS a, BAB_APPLIED_JOB_DETAILS b, BAB_PROFILE c "+ 
+		        		 "where a.job_id = b.job_id and "+ 
+		        		 "a.job_owner_email_id = ? and "+
+		        		 "c.email_id = b.applied_buddy_email_id";
 		   		
 		   		
 		   		stmt = conn.prepareStatement(sqlMyNotification);
@@ -177,6 +177,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	</div>
 	</div>
-<%@ include file="footer.jsp" %>
+<%-- <%@ include file="footer.jsp" %> --%>
 </body>
 </html>	

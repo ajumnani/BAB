@@ -40,7 +40,7 @@
 	    	}
     		else{		
     		String sql ;
-    		sql="insert into bab_applied_job_details(JOB_ID, APPLIED_BUDDY_EMAIL_ID,APPLIED_BUDDY_CONTACT_NO) values (?,?,?)"; 
+    		sql="insert into BAB_APPLIED_JOB_DETAILS(JOB_ID, APPLIED_BUDDY_EMAIL_ID,APPLIED_BUDDY_CONTACT_NO) values (?,?,?)"; 
         	stmt = conn.prepareStatement(sql);
 			stmt=conn.prepareStatement(sql);
 	    	stmt.setString(1, jobId);

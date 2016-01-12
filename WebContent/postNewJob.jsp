@@ -134,8 +134,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  </div>
 </div>
 
-<%@ include file="footer.jsp" %>
-
+<%-- <%@ include file="footer.jsp" %>
+ --%>
 
 
 </body>

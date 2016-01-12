@@ -20,7 +20,7 @@
         conn=db.getJNDIConnection();
         Buddy buddy=(Buddy)session.getAttribute("buddy");
         	if(buddy!=null){
-          	String sql="UPDATE BAB_PROFILE SET NAME = ?, CONTACT_NO=?, CURRENT_COMPANY_NAME =? , update_date = sysdate WHERE EMAIL_ID = ?";
+          	String sql="UPDATE BAB_PROFILE SET NAME = ?, CONTACT_NO=?, CURRENT_COMPANY_NAME =? , update_date = sysdate() WHERE EMAIL_ID = ?";
           	stmt=conn.prepareStatement(sql);
     	    stmt.setString(1, name);
     	    stmt.setString(2, contactNo);

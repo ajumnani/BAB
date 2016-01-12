@@ -87,7 +87,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   		
 		   		if(buddy!=null){
 		   		//My Applied Jobs STarts here
-		        String sqlMyAppliedJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,TO_CHAR(CREATE_DATE,'DD') POST_DAY,TO_CHAR(CREATE_DATE,'Mon') POST_MONTH_YEAR from bab_job_details a where job_id in (select job_id from bab_applied_job_details where applied_buddy_email_id = ? ) AND FLAG = 'A' order by update_Date desc";
+		        String sqlMyAppliedJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'%d') POST_DAY,DATE_FORMAT(CREATE_DATE,'%b') POST_MONTH_YEAR from BAB_JOB_DETAILS a where job_id in (select job_id from BAB_APPLIED_JOB_DETAILS where applied_buddy_email_id = ? ) AND FLAG = 'A' order by update_Date desc";
 		    	stmt = conn.prepareStatement(sqlMyAppliedJobs);
 		    	stmt.setString(1, buddy.getEmailId());
 				
@@ -117,9 +117,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   		
 		   		if(buddy!=null){
 		   		//My Posted Jobs Starts here
-		        String sqlMyPostedJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,TO_CHAR(CREATE_DATE,'DD') POST_DAY,TO_CHAR(CREATE_DATE,'Mon') POST_MONTH_YEAR from bab_job_details a where job_owner_email_id = ? and flag = 'A' order by update_Date desc";
-				
-		    	stmt = conn.prepareStatement(sqlMyPostedJobs);
+		        String sqlMyPostedJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'%d') POST_DAY,DATE_FORMAT(CREATE_DATE,'%b') POST_MONTH_YEAR from BAB_JOB_DETAILS a where job_owner_email_id =? and flag = 'A' order by update_Date desc";		    	stmt = conn.prepareStatement(sqlMyPostedJobs);
 				stmt.setString(1, buddy.getEmailId());
 				System.out.println("Success 3");
 		    	rs = stmt.executeQuery();
@@ -282,7 +280,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 
 
-<%@ include file="footer.jsp" %>
-
+<%-- <%@ include file="footer.jsp" %>
+ --%>
 </body>
 </html>	

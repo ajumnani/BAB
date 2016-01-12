@@ -19,7 +19,7 @@
         Buddy buddy=(Buddy)session.getAttribute("buddy");
         	if(buddy!=null){
           	
-    	   	String sql="UPDATE BAB_JOB_DETAILS SET flag = 'D' , update_Date = sysdate WHERE  job_id= ? ";
+    	   	String sql="UPDATE BAB_JOB_DETAILS SET flag = 'D' , update_Date = sysdate() WHERE  job_id= ? ";
           	stmt=conn.prepareStatement(sql);
     	    stmt.setString(1, jobId );
     	    
