@@ -151,7 +151,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 <p><span class="m_2">Buddy's Contact No : </span><%=myNotify.getAppliedBuddyConactNo() %></p>
 			    	 
 				   </div>
+				   <a href="viewSingleJob.jsp?job_id=<%=myNotify.getJobId()%>&page=VAJ"
+							 class="open-ApplyJobDialog btn btn-primary">View Comments</a>	
+							 <hr>
 			    </div>
+			    
+				
+				
 			    <div class="clearfix"> </div>
 			 </div>
 			 

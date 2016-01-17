@@ -200,6 +200,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="clearfix"> </div>
 					
 				</div>
+				<br>
+				<a href="viewSingleJob.jsp?job_id=<%=jobPost.getJobId()%>&page=VAJ"
+							 class="open-ApplyJobDialog btn btn-primary">View Comments</a>	
+				<hr>
 			 </div>
 			  <%}
 			}
@@ -247,10 +251,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="clearfix"> </div>
 					<input type="hidden" name="jobId" value="<%=jobPost.getJobId() %>" >	
 					<input type="hidden" name="jobOwnerEmailId" value="<%=jobPost.getJobOwnerEmailId() %>" >	
-					
-					 <input type="submit" value="I Got My Buddy for this Job. Deactivate this Job" class="btn btn-primary btn-sm"> 	
+					<br>
+					 <input type="submit" value="Deactivate this Job" class="btn btn-primary"> 	<a href="viewSingleJob.jsp?job_id=<%=jobPost.getJobId()%>&page=VAJ"
+							 class="open-ApplyJobDialog btn btn-primary">View Comments</a>
 					</form>
+					
 				</div>
+				<hr>
+					
+				
 			 </div>
 			  <%}
 		    }

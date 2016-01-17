@@ -54,7 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 	<%@ include file="header.jsp"%>
-
+	<%@ include file="quickSearch.jsp"%>
 
 
 	<div class="container">
@@ -94,14 +94,122 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						conn = db.getJNDIConnection();
 						//All Jobs Starts here
 						if(buddy!=null){
-						String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'%d') POST_DAY,DATE_FORMAT(CREATE_DATE,'%b') POST_MONTH_YEAR from BAB_JOB_DETAILS where job_owner_email_id != ? and job_id not in (select job_id from BAB_APPLIED_JOB_DETAILS where applied_buddy_email_id = ? ) AND FLAG = 'A' order by create_Date desc";
-						stmt = conn.prepareStatement(sqlAllJobs);
-						stmt.setString(1, buddy.getEmailId());
-						stmt.setString(2, buddy.getEmailId());
+							if(request.getParameter("searchSills") != null && request.getParameter("searchLocation") != null )
+							{
+								System.out.println("Null check success");
+						
+									
+							
+								String searchSkills = request.getParameter("searchSills");
+								String searchLocation = request.getParameter("searchLocation");
+								
+								if(!"".equalsIgnoreCase(searchSkills) || !"".equalsIgnoreCase(searchLocation)){
+								
+									System.out.println("Empty check success");
+									
+								if(!"".equalsIgnoreCase(searchSkills))
+								searchSkills="%"+searchSkills+"%";
+								
+								
+								if(!"".equalsIgnoreCase(searchLocation))
+								searchLocation="%"+searchLocation+"%";
+								System.out.println(searchSkills);
+								System.out.println(searchLocation);
+								
+								
+								String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'DD') POST_DAY,DATE_FORMAT(CREATE_DATE,'Mon') POST_MONTH_YEAR "+ 
+										"from BAB_JOB_DETAILS where  "+
+										 "(upper(job_skills) like upper(?) OR  upper(job_location) like upper(?)) and FLAG='A' "+   
+										 "order by create_Date desc";	
+								stmt = conn.prepareStatement(sqlAllJobs);
+								stmt.setString(1, searchSkills);
+								stmt.setString(2, searchLocation);
+								
+								
+								System.out.println(sqlAllJobs);
+							}
+							else{
+								
+								System.out.println("empty check failure");
+								
+								String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'%d') POST_DAY,DATE_FORMAT(CREATE_DATE,'%b') POST_MONTH_YEAR from BAB_JOB_DETAILS where job_owner_email_id != ? and job_id not in (select job_id from BAB_APPLIED_JOB_DETAILS where applied_buddy_email_id = ? ) AND FLAG = 'A' order by create_Date desc";	
+								stmt = conn.prepareStatement(sqlAllJobs);
+								stmt.setString(1, buddy.getEmailId());
+								stmt.setString(2, buddy.getEmailId());
+								
+							}
+							
+							}
+							else{
+								System.out.println("Null check failure");
+								
+								String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'%d') POST_DAY,DATE_FORMAT(CREATE_DATE,'%b') POST_MONTH_YEAR from BAB_JOB_DETAILS where job_owner_email_id != ? and job_id not in (select job_id from BAB_APPLIED_JOB_DETAILS where applied_buddy_email_id = ? ) AND FLAG = 'A' order by create_Date desc";
+								stmt = conn.prepareStatement(sqlAllJobs);
+								stmt.setString(1, buddy.getEmailId());
+								stmt.setString(2, buddy.getEmailId());
+								
+							}
+						
+												
+						
+						
+						
 						}
 						else{
-							String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'%d') POST_DAY,DATE_FORMAT(CREATE_DATE,'%b') POST_MONTH_YEAR from BAB_JOB_DETAILS where FLAG = 'A' order by create_Date desc";	
-							stmt = conn.prepareStatement(sqlAllJobs);
+							
+							
+							if(request.getParameter("searchSills") != null && request.getParameter("searchLocation") != null )
+							{
+								System.out.println("Null check success");
+								
+									
+							
+								String searchSkills = request.getParameter("searchSills");
+								String searchLocation = request.getParameter("searchLocation");
+								
+								if(!"".equalsIgnoreCase(searchSkills) || !"".equalsIgnoreCase(searchLocation)){
+								
+									System.out.println("Empty check success");
+									
+								if(!"".equalsIgnoreCase(searchSkills))
+								searchSkills="%"+searchSkills+"%";
+								
+								
+								if(!"".equalsIgnoreCase(searchLocation))
+								searchLocation="%"+searchLocation+"%";
+								System.out.println(searchSkills);
+								System.out.println(searchLocation);
+								
+								
+								String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'DD') POST_DAY,DATE_FORMAT(CREATE_DATE,'Mon') POST_MONTH_YEAR "+ 
+										"from BAB_JOB_DETAILS where  "+
+										 "(upper(job_skills) like upper(?) OR  upper(job_location) like upper(?)) and FLAG='A' "+   
+										 "order by create_Date desc";	
+								stmt = conn.prepareStatement(sqlAllJobs);
+								stmt.setString(1, searchSkills);
+								stmt.setString(2, searchLocation);
+								
+								
+								System.out.println(sqlAllJobs);
+							}
+							else{
+								
+								System.out.println("empty check failure");
+								
+								String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'%d') POST_DAY,DATE_FORMAT(CREATE_DATE,'%b') POST_MONTH_YEAR from BAB_JOB_DETAILS where FLAG = 'A' order by create_Date desc";	
+								stmt = conn.prepareStatement(sqlAllJobs);
+							}
+							
+							}
+							else{
+								System.out.println("Null check failure");
+								
+								String sqlAllJobs = "select JOB_ID,JOB_TITLE,JOB_DESCRIPTION,JOB_COMPANY,JOB_LOCATION,JOB_EXP,JOB_SKILLS,JOB_OWNER_EMAIL_ID,CREATE_DATE,UPDATE_DATE,DATE_FORMAT(CREATE_DATE,'%d') POST_DAY,DATE_FORMAT(CREATE_DATE,'%b') POST_MONTH_YEAR from BAB_JOB_DETAILS where FLAG = 'A' order by create_Date desc";	
+								stmt = conn.prepareStatement(sqlAllJobs);
+							}
+							
+							
+							
 						}
 						
 						
@@ -158,6 +266,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						JobPost jobPost = new JobPost();
 						jobPost = allJobs.get(i);
 				%>
+				
 				<div class="jobs_follow jobs-single-item">
 					<div class="thumb_right">
 						<br>
@@ -180,14 +289,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<p>
 							Skills :
 							<%=jobPost.getJobSkills()%></p>
-
-
-						<hr>
+						<br>
 						<a href="#" class="open-ApplyJobDialog btn btn-primary"
 							data-toggle="modal"
 							data-id="<%=jobPost.getJobId()%>,<%=jobPost.getJobOwnerEmailId()%>"
 							data-target="#applyJobDialog">Apply for this Job</a>
-
+							
+						
+						<a href="viewSingleJob.jsp?job_id=<%=jobPost.getJobId()%>&page=VAJ"
+							 class="open-ApplyJobDialog btn btn-primary">View Comments</a>	
+						
+						<hr>
+						
 
 						<%
 							}
@@ -251,8 +364,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												String jobId = request.getParameter("JOB_ID");
 												String jobOwnerEmailId = request.getParameter("JOB_OWNER_EMAIL_ID");
 												
-												
-											
 											
 											%>
 											<input type="hidden" name="jobId" id="jobId" value="" />
