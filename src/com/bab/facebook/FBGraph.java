@@ -1,7 +1,7 @@
 package com.bab.facebook;
 
-import java.io.BufferedReader;
 
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -20,41 +20,45 @@ public class FBGraph {
 
 	public String getFBGraph() {
 		String graph = null;
+		URL u=null;
+		URLConnection c=null;
+		StringBuffer b=null;
 		try {
 
-			String g = "https://graph.facebook.com/me?" + accessToken;
-			URL u = new URL(g);
-			URLConnection c = u.openConnection();
+			String g = "https://graph.facebook.com/me?fields=email,name,gender&" + accessToken;
+			 u = new URL(g);
+			 c = u.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					c.getInputStream()));
 			String inputLine;
-			StringBuffer b = new StringBuffer();
+			 b = new StringBuffer();
 			while ((inputLine = in.readLine()) != null)
 				b.append(inputLine + "\n");
 			in.close();
 			graph = b.toString();
-			System.out.print("Printing graph");
 			System.out.println(graph);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("ERROR in getting FB graph data. " + e);
 		}
+		finally{
+			u=null;
+			c=null;
+			b=null;
+		}
 		return graph;
 	}
 
-	public Map getGraphData(String fbGraph) {
-		Map fbProfile = new HashMap();
+	public Map<String, String> getGraphData(String fbGraph) {
+		Map<String, String> fbProfile = new HashMap<String, String>();
 		try {
 			JSONObject json = new JSONObject(fbGraph);
-			
-			System.out.println("Json "+json);
-			
-			/*fbProfile.put("id", json.getString("id"));
-			fbProfile.put("first_name", json.getString("first_name"));
+			fbProfile.put("id", json.getString("id"));
+			fbProfile.put("name", json.getString("name"));
 			if (json.has("email"))
 				fbProfile.put("email", json.getString("email"));
 			if (json.has("gender"))
-				fbProfile.put("gender", json.getString("gender"));*/
+				fbProfile.put("gender", json.getString("gender"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 			throw new RuntimeException("ERROR in parsing FB graph data. " + e);

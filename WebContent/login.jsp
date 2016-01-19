@@ -91,7 +91,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="login-bottom">
 					 <!-- <p>With your social media account</p> -->
 					 <div class="social-icons">
-						<%-- <div class="button">
+						 <div class="button">
 							
 							<!-- 
 							<a class="tw" href="#"> <i class="fa fa-twitter tw2"> </i><span>Twitter</span>
@@ -105,7 +105,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							 -->
 							 <div class="clearfix"> </div>
 						</div>
-	 --%>					<h4>Don't have an Account? <a href="register.jsp"> Register Now!</a></h4>
+	 					<h4>Don't have an Account? <a href="register.jsp"> Register Now!</a></h4>
 					 </div>
 		           </div>
                 </div>

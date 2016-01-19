@@ -1,5 +1,6 @@
 package com.bab.facebook;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,9 +11,9 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 public class FBConnection {
-	public static final String FB_APP_ID = "1683651718518272";
-	public static final String FB_APP_SECRET = "eebeef40388c0ffbaf386301a1a8f73b";
-	public static final String REDIRECT_URI = "http://localhost:8081/BringAnyBody/fbhome";
+	public static final String FB_APP_ID = "1672047269750890";
+	public static final String FB_APP_SECRET = "030670da3d4059376965053f54a3e769";
+	public static final String REDIRECT_URI = "http://bringanybuddy.com/fbhome";
 
 	static String accessToken = "";
 
@@ -43,19 +44,20 @@ public class FBConnection {
 	}
 
 	public String getAccessToken(String code) {
+		accessToken="";
 		if ("".equals(accessToken)) {
-			URL fbGraphURL;
+			URL fbGraphURL=null;
 			try {
 				fbGraphURL = new URL(getFBGraphUrl(code));
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 				throw new RuntimeException("Invalid code received " + e);
 			}
-			URLConnection fbConnection;
+			URLConnection fbConnection=null;
 			StringBuffer b = null;
 			try {
 				fbConnection = fbGraphURL.openConnection();
-				BufferedReader in;
+				BufferedReader in=null;
 				in = new BufferedReader(new InputStreamReader(
 						fbConnection.getInputStream()));
 				String inputLine;
